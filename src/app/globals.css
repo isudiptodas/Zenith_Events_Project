@@ -17,3 +17,18 @@
   font-family: "Inter";
   font-style: normal;
 }
+
+/* Chrome, Safari, Edge, Opera */
+::-webkit-scrollbar {
+  display: none;
+}
+
+/* Firefox */
+* {
+  scrollbar-width: none;
+}
+
+/* Internet Explorer and old Edge */
+* {
+  -ms-overflow-style: none;
+}

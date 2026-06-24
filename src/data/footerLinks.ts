@@ -28,16 +28,16 @@ export const footerLinks = [
                 link: `/about`
             },
             {
-                name: `Twitter`,
-                link: `/events`
-            },
-            {
                 name: `Instagram`,
                 link: `/services`
             },
             {
                 name: `LinkedIn`,
                 link: `/contact`
+            },
+            {
+                name: `Whatsapp`,
+                link: `918582888324 `
             },
         ]
     },
@@ -51,10 +51,6 @@ export const footerLinks = [
             {
                 name: `Terms of Use`,
                 link: `/terms`
-            },
-            {
-                name: `Data Usage`,
-                link: `/data-usage`
             },
         ]
     }
