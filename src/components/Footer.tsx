@@ -17,13 +17,23 @@ function Footer() {
     const [sending, setSending] = useState(false);
 
     const sendQuery = async () => {
-        
-        if(sending){
+
+        if (sending) {
             return;
         }
 
         if (!message || !name || !email || !contact) {
             toast.error("Please enter details");
+            return;
+        }
+
+        if (contact.length < 10) {
+            toast.error("Please enter valid 10 numbers");
+            return;
+        }
+
+        if (!email.trim().endsWith('@gmail.com') && !email.trim().endsWith('@outlook.com')) {
+            toast.error("Please enter a valid email");
             return;
         }
 
@@ -38,11 +48,16 @@ function Footer() {
             toast.success("Your query submitted");
         } catch (error: any) {
             console.log(error);
-            toast.error("Something went wrong");
+            const message = error?.response?.data?.message || "Something went wrong";
+            toast.error(message);
         }
         finally {
             toast.dismiss(id);
             setSending(false);
+            setEmail('');
+            setName('');
+            setContact('');
+            setMessage('');
         }
     }
 
@@ -61,14 +76,14 @@ function Footer() {
                                     <p className={`font-semibold font-lexend text-lg text-white select-none`}>{item.name}</p>
                                     <div className={`w-[70%] my-3 h-[2px] bg-linear-to-r from-transparent via-[#4c7cff] to-transparent`} />
                                     {item.links.map((item, index) => {
-                                        return <span onClick={() => { 
-                                            if(item.link.startsWith('https')){
+                                        return <span onClick={() => {
+                                            if (item.link.startsWith('https')) {
                                                 window.open(item.link, '_blank')
                                             }
-                                            else if(item.link.startsWith('91')){
+                                            else if (item.link.startsWith('91')) {
                                                 window.open(`https://wa.me/${item.link}`, '_blank')
                                             }
-                                            else{
+                                            else {
                                                 router.push(item.link)
                                             }
                                         }} key={index} className={`cursor-pointer text-[10px] lg:text-[12px] mb-2 text-white font-light `}>{item.name}</span>

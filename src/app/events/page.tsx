@@ -26,6 +26,39 @@ function page() {
     };
   }, [visible]);
 
+  const parseEventDate = (dateString: string): Date => {
+    const trimmed = dateString.trim();
+
+    // Format: "22 & 23 August, 2026"
+    const multiDayMatch = trimmed.match(
+      /^(\d+)\s*&\s*(\d+)\s+([A-Za-z]+),\s*(\d{4})$/
+    );
+
+    if (multiDayMatch) {
+      const [, , endDay, month, year] = multiDayMatch;
+      return new Date(`${month} ${endDay}, ${year}`);
+    }
+
+    // Format: "September, 2026"
+    const monthOnlyMatch = trimmed.match(
+      /^([A-Za-z]+),\s*(\d{4})$/
+    );
+
+    if (monthOnlyMatch) {
+      const [, month, year] = monthOnlyMatch;
+
+      // Last day of month
+      return new Date(
+        Number(year),
+        new Date(`${month} 1, ${year}`).getMonth() + 1,
+        0
+      );
+    }
+
+    // Format: "22 July, 2026"
+    return new Date(trimmed);
+  };
+
   const today = new Date();
   today.setHours(0, 0, 0, 0);
 
@@ -34,7 +67,7 @@ function page() {
     pastEvents: Event[];
   }>(
     (acc, event) => {
-      const eventDate = new Date(event.date);
+      const eventDate = parseEventDate(event.date);
 
       if (eventDate >= today) {
         acc.upcomingEvents.push(event);
@@ -73,12 +106,12 @@ function page() {
           <section className={`w-full mt-10 h-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 justify-items-start gap-8 px-2 lg:px-5`}>
             <Activity mode={option === 'upcoming' ? "visible" : "hidden"}>
               {upcomingEvents.map((item, index) => {
-                return <EventCard key={index} name={item.name} desc={item.desc} date={item.date} id={item.id} link={item.link} location={item.location} expired={new Date(item.date) < today} points={item.points} setVisible={() => { setVisible(!visible); setPopupPoster(item.poster) }} poster={item.poster} />
+                return <EventCard key={index} name={item.name} desc={item.desc} date={item.date} id={item.id} link={item.link} location={item.location} expired={parseEventDate(item.date) < today} points={item.points} setVisible={() => { setVisible(!visible); setPopupPoster(item.poster) }} poster={item.poster} />
               })}
             </Activity>
             <Activity mode={option === 'past' ? "visible" : "hidden"}>
               {pastEvents.map((item, index) => {
-                return <EventCard key={index} name={item.name} desc={item.desc} date={item.date} id={item.id} link={item.link} location={item.location} expired={new Date(item.date) < today} points={item.points} setVisible={() => { setVisible(!visible); setPopupPoster(item.poster) }} poster={item.poster} />
+                return <EventCard key={index} name={item.name} desc={item.desc} date={item.date} id={item.id} link={item.link} location={item.location} expired={parseEventDate(item.date) < today} points={item.points} setVisible={() => { setVisible(!visible); setPopupPoster(item.poster) }} poster={item.poster} />
               })}
             </Activity>
           </section>

@@ -2,81 +2,91 @@ export const allEvents = [
     {
         id: 1,
         name: `Bounce`,
-        desc: `this is a small description for the event named Bounce. It will take place on 5th july on
-        a place the name i dont know. But i know the event will happen and will happen at a large scale, annnnd yeah that's it.`,
+        desc: `Bounce is a 3x3 basketball tournament. Play hard, play fast & leave your mark.`,
         points: [
-            '20+ teams',
-            '3 cash prize section',
-            'Both men & women teams',
-            'Meals provided'
+            'Prize pool upto 25,000/-',
+            'Registration fee : 1,250/-',
+            '3 Players + 1 Sub',
+            'Registrations open till July 2nd'
         ],
-        poster: `/assets/steve.jpg`,
-        location: `Jani na`,
+        poster: `/assets/events/bounce.jpeg`,
+        location: `Chetla Park Athletic Club`,
         date: `5 July, 2026`,
         link: `https://www.example.com`,
     },
     {
         id: 2,
-        name: `Bounce`,
-        desc: `this is a small description for the event named Bounce. It will take place on 5th july on
-        a place the name i dont know. But i know the event will happen and will happen at a large scale, annnnd yeah that's it.`,
+        name: `Udbhav`,
+        desc: `Udbhav is an inter-school cultural event. A celebration of talent, cultural and creativity.`,
         points: [
             '20+ teams',
             '3 cash prize section',
             'Both men & women teams',
             'Meals provided'
         ],
-        poster: ``,
-        location: `Jani na`,
-        date: `17 July, 2026`,
+        poster: `/assets/events/udbhav.jpg`,
+        location: `Ahindra Mancha`,
+        date: `22 & 23 August, 2026`,
         link: `https://www.example.com`,
     },
     {
         id: 3,
-        name: `Bounce`,
-        desc: `this is a small description for the event named Bounce. It will take place on 5th july on
-        a place the name i dont know. But i know the event will happen and will happen at a large scale, annnnd yeah that's it.`,
+        name: `Bellissima`,
+        desc: `A vibrant place where Kolkata's top college talent celebrates fashion, creativity, and self-expression.`,
         points: [
-            '20+ teams',
-            '3 cash prize section',
-            'Both men & women teams',
-            'Meals provided'
+            '10 teams - first come , first serve',
+            'Registration fee : 5000/- per team',
+            'E-Certificates for all participates',
+            'Prizes upto 25,000'
         ],
-        poster: ``,
-        location: `Jani na`,
-        date: `17 July, 2025`,
+        poster: `/assets/events/bellissima.jpg`,
+        location: `N/A`,
+        date: `September, 2026`,
         link: `https://www.example.com`,
     },
     {
         id: 4,
-        name: `Bounce`,
-        desc: `this is a small description for the event named Bounce. It will take place on 5th july on
-        a place the name i dont know. But i know the event will happen and will happen at a large scale, annnnd yeah that's it.`,
+        name: `KBC`,
+        desc: `An ultimate culinary showdown and 3 course meal competition in 4 hrs between the best restaurants.`,
         points: [
-            '20+ teams',
-            '3 cash prize section',
-            'Both men & women teams',
-            'Meals provided'
+            'Prizes worth upto 3,00,000/-',
+            'Extensive marketing benefits across social media',
+            '3 course meal in 4 hours',
+            'National & International chef judges'
         ],
-        poster: ``,
-        location: `Jani na`,
-        date: `18 August, 2025`,
+        poster: `/assets/events/kbc.jpg`,
+        location: `N/A`,
+        date: `September, 2026`,
         link: `https://www.example.com`,
     },
     {
         id: 5,
-        name: `Bounce`,
-        desc: `this is a small description for the event named Bounce. It will take place on 5th july on
-        a place the name i dont know. But i know the event will happen and will happen at a large scale, annnnd yeah that's it.`,
+        name: `Careerscope`,
+        desc: `An elite multi-industry requirement intensive where talent meets opportunity.`,
+        points: [
+            '20+ top companies',
+            'Real time interviews & placements',
+            'Career clarity & interview readiness',
+            'Entry to senior level roles'
+        ],
+        poster: `/assets/events/careerscope.jpg`,
+        location: `N/A`,
+        date: `October, 2026`,
+        link: `https://www.example.com`,
+    },
+    {
+        id: 6,
+        name: `VICI`,
+        desc: `An inter-school athletic championship with multiple sports games.`,
         points: [
             '20+ teams',
             '3 cash prize section',
             'Both men & women teams',
             'Meals provided'
         ],
-        poster: `/assets/steve.jpg`,
-        location: `Jani na`,
-        date: `18 June, 2027`,
+        poster: `/assets/events/vici.jpg`,
+        location: `N/A`,
+        date: `December, 2026`,
         link: `https://www.example.com`,
     },
 ]
