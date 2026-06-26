@@ -1,4 +1,5 @@
 import { EmailTemplate } from '@/components/EmailTemplate'
+import { ZenithEmailTemplate } from '@/components/ZenithEmailTemplate'
 import { NextRequest, NextResponse } from 'next/server';
 import { Resend } from 'resend';
 import React from 'react';
@@ -27,8 +28,8 @@ export async function POST(req: NextRequest, res: NextResponse) {
         const { data, error } = await resend.emails.send({
             from: 'Zenith Events & Financial Consultancy <onboarding@resend.dev>',
             to: ['zefc2026@gmail.com'],
-            subject: 'Query Submitted',
-            react: React.createElement(EmailTemplate, {
+            subject: 'User Query',
+            react: React.createElement(ZenithEmailTemplate, {
                 name,
                 email,
                 contact,
@@ -51,9 +52,6 @@ export async function POST(req: NextRequest, res: NextResponse) {
             subject: 'Query Submitted',
             react: React.createElement(EmailTemplate, {
                 name,
-                email,
-                contact,
-                message,
             }),
         });
 
