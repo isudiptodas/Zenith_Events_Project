@@ -14,13 +14,6 @@ export async function POST(req: NextRequest, res: NextResponse) {
     const domain = email.split("@")[1];
 
     try {
-
-    } catch (err) {
-
-    }
-
-    try {
-
         const records = await dns.resolveMx(domain);
 
         if (records.length === 0) {
