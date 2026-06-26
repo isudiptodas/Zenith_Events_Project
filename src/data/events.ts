@@ -79,10 +79,10 @@ export const allEvents = [
         name: `VICI`,
         desc: `An inter-school athletic championship with multiple sports games.`,
         points: [
-            '20+ teams',
-            '3 cash prize section',
-            'Both men & women teams',
-            'Meals provided'
+            'Track events (100m - 5000m)',
+            'Relays (4x100m, 4x200m)',
+            'Field events (Long jump, Triple jump, Shotput)',
+            'Tug of War'
         ],
         poster: `/assets/events/vici.jpg`,
         location: `N/A`,
