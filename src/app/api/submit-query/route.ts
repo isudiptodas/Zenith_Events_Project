@@ -23,6 +23,7 @@ export async function POST(req: NextRequest, res: NextResponse) {
             }, { status: 400 });
         }
 
+        // send mail to organization
         const { data, error } = await resend.emails.send({
             from: 'Zenith Events & Financial Consultancy <onboarding@resend.dev>',
             to: ['zefc2026@gmail.com'],
@@ -37,6 +38,27 @@ export async function POST(req: NextRequest, res: NextResponse) {
 
         if (error) {
             console.log(error);
+            return NextResponse.json({
+                success: false,
+                message: `Could not sent mail`
+            }, { status: 503 });
+        }
+
+        // send mail to user to notify
+         const { data: dt, error: err } = await resend.emails.send({
+            from: 'Zenith Events & Financial Consultancy <onboarding@resend.dev>',
+            to: [email as string],
+            subject: 'Query Submitted',
+            react: React.createElement(EmailTemplate, {
+                name,
+                email,
+                contact,
+                message,
+            }),
+        });
+
+        if (err) {
+            console.log(err);
             return NextResponse.json({
                 success: false,
                 message: `Could not sent mail`
