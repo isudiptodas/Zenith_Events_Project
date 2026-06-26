@@ -25,15 +25,15 @@ export const footerLinks = [
         links: [
             {
                 name: `Facebook`,
-                link: `/about`
+                link: `https://www.facebook.com/share/17DeXWWTAT/`
             },
             {
                 name: `Instagram`,
-                link: `/services`
+                link: `https://www.instagram.com/zenith_eventsandfc`
             },
             {
                 name: `LinkedIn`,
-                link: `/contact`
+                link: `https://www.linkedin.com/in/zenith-events-and-financial-consultancy-5474053b8`
             },
             {
                 name: `Whatsapp`,
