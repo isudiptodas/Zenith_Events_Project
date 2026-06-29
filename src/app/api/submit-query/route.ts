@@ -7,26 +7,26 @@ import dns from "dns/promises";
 
 const resend = new Resend(process.env.RESEND_API_KEY as string);
 
-export async function POST(req: NextRequest, res: NextResponse) {
+export async function POST(req: NextRequest) {
 
     const body = await req.json();
     const { name, contact, email, message } = body;
 
-    const domain = email.split("@")[1];
+    // const domain = email.split("@")[1];
 
     try {
-        const records = await dns.resolveMx(domain);
+        // const records = await dns.resolveMx(domain);
 
-        if (records.length === 0) {
-            return NextResponse.json({
-                success: false,
-                message: `Email domain cannot receive emails`
-            }, { status: 400 });
-        }
+        // if (records.length === 0) {
+        //     return NextResponse.json({
+        //         success: false,
+        //         message: `Email domain cannot receive emails`
+        //     }, { status: 400 });
+        // }
 
         // send mail to organization
         const { data, error } = await resend.emails.send({
-            from: 'Zenith Events & Financial Consultancy <onboarding@resend.dev>',
+            from: 'Zenith Events & Financial Consultancy <booking@zefc.in>',
             to: ['zefc2026@gmail.com'],
             subject: 'User Query',
             react: React.createElement(ZenithEmailTemplate, {
@@ -47,7 +47,7 @@ export async function POST(req: NextRequest, res: NextResponse) {
 
         // send mail to user to notify
          const { data: dt, error: err } = await resend.emails.send({
-            from: 'Zenith Events & Financial Consultancy <onboarding@resend.dev>',
+            from: 'Zenith Events & Financial Consultancy <booking@zefc.in>',
             to: [email as string],
             subject: 'Query Submitted',
             react: React.createElement(EmailTemplate, {

@@ -106,12 +106,12 @@ function page() {
           <section className={`w-full mt-10 h-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 justify-items-start gap-8 px-2 lg:px-5`}>
             <Activity mode={option === 'upcoming' ? "visible" : "hidden"}>
               {upcomingEvents.map((item, index) => {
-                return <EventCard key={index} name={item.name} desc={item.desc} date={item.date} id={item.id} link={item.link} location={item.location} expired={parseEventDate(item.date) < today} points={item.points} setVisible={() => { setVisible(!visible); setPopupPoster(item.poster) }} poster={item.poster} />
+                return <EventCard key={index} thumbnail={item.thumbnail} name={item.name} desc={item.desc} date={item.date} id={item.id} link={item.link} location={item.location} expired={parseEventDate(item.date) < today} points={item.points} setVisible={() => { setVisible(!visible); setPopupPoster(item.poster) }} poster={item.poster} />
               })}
             </Activity>
             <Activity mode={option === 'past' ? "visible" : "hidden"}>
               {pastEvents.map((item, index) => {
-                return <EventCard key={index} name={item.name} desc={item.desc} date={item.date} id={item.id} link={item.link} location={item.location} expired={parseEventDate(item.date) < today} points={item.points} setVisible={() => { setVisible(!visible); setPopupPoster(item.poster) }} poster={item.poster} />
+                return <EventCard key={index} thumbnail={item.thumbnail} name={item.name} desc={item.desc} date={item.date} id={item.id} link={item.link} location={item.location} expired={parseEventDate(item.date) < today} points={item.points} setVisible={() => { setVisible(!visible); setPopupPoster(item.poster) }} poster={item.poster} />
               })}
             </Activity>
           </section>
