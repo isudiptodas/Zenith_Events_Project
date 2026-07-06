@@ -6,6 +6,7 @@ import { motion } from "motion/react"
 import { IoIosCall } from "react-icons/io";
 import { FaMapLocationDot } from "react-icons/fa6";
 import { IoMdMailOpen } from "react-icons/io";
+import WhatsappPopup from "@/components/WhatsappPopup";
 
 function page() {
 
@@ -14,9 +15,10 @@ function page() {
       <div className={`w-full h-auto flex flex-col justify-start items-center relative overflow-hidden bg-zinc-950`}>
 
         <Navbar />
+        <WhatsappPopup/>
 
         <section className={`w-full md:w-[70%] mt-14 pb-16 px-5 min-h-screen flex flex-col justify-start items-center`}>
-          <motion.h1 initial={{ opacity: 0, filter: "blur(20px)" }} animate={{ opacity: 1, filter: "blur(0px)" }} transition={{ duration: 0.3, delay: 0.3, ease: "easeInOut" }} className={`w-full text-center mb-3 font-bold text-4xl md:text-6xl font-lexend bg-linear-to-b from-yellow-300 to-yellow-800 bg-clip-text text-transparent select-none mt-16 lg:mt-20`}>Contact Us</motion.h1>
+          <motion.h1 initial={{ opacity: 0, filter: "blur(20px)" }} animate={{ opacity: 1, filter: "blur(0px)" }} transition={{ duration: 0.3, delay: 0.3, ease: "easeInOut" }} className={`w-full text-center mb-3 font-bold text-4xl md:text-6xl font-lexend bg-linear-to-b from-yellow-300 to-yellow-800 bg-clip-text text-transparent select-none mt-16 lg:mt-20`}>CONTACT US</motion.h1>
           
           <motion.hr initial={{ opacity: 0, filter: "blur(20px)" }} animate={{ opacity: 1, filter: "blur(0px)" }} transition={{ duration: 0.3, delay: 0.3, ease: "easeInOut" }} className={`w-[80%] my-5 h-[2px] bg-linear-to-r from-transparent via-yellow-500 to-transparent`} />
 

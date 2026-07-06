@@ -8,6 +8,7 @@ import { RiGeminiFill } from "react-icons/ri";
 import { useRouter } from "next/navigation";
 import Footer from "@/components/Footer";
 import { motion } from 'motion/react'
+import WhatsappPopup from "@/components/WhatsappPopup";
 
 function page() {
 
@@ -20,22 +21,30 @@ function page() {
         {/* navbar */}
         <Navbar />
 
+        <WhatsappPopup />
+
         {/* hero section */}
         <section className={`w-full relative h-screen bg-zinc-950 flex flex-col justify-center items-center`}>
 
           {/* gradient strips */}
-          <div className={`w-full absolute top-0 z-10 h-[90%] flex justify-between items-start`}>
-            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.3, ease: "easeInOut" }} className={`w-full h-full bg-linear-to-b from-blue-700 via-purple-500 to-zinc-950`} />
-            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.6, ease: "easeInOut" }} className={`w-full h-[80%] bg-linear-to-b from-blue-700 via-purple-500 to-zinc-950`} />
-            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.8, ease: "easeInOut" }} className={`w-full h-[60%] bg-linear-to-b from-blue-700 via-purple-500 to-zinc-950`} />
-            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1, ease: "easeInOut" }} className={`w-full h-[40%] bg-linear-to-b from-blue-700 via-purple-500 to-zinc-950`} />
-            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.8, ease: "easeInOut" }} className={`w-full h-[60%] bg-linear-to-b from-blue-700 via-purple-500 to-zinc-950`} />
-            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.6, ease: "easeInOut" }} className={`w-full h-[80%] bg-linear-to-b from-blue-700 via-purple-500 to-zinc-950`} />
-            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.3, ease: "easeInOut" }} className={`w-full h-full bg-linear-to-b from-blue-700 via-purple-500 to-zinc-950`} />
+          {/* <div className={`w-full absolute top-0 z-10 h-[90%] flex justify-between items-start`}>
+            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.3, ease: "easeInOut" }} className={`w-full h-full bg-linear-to-b from-[#051429] via-[#0A3D91] to-zinc-950`} />
+            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.6, ease: "easeInOut" }} className={`w-full h-[80%] bg-linear-to-b from-[#051429] via-[#0A3D91] to-zinc-950`} />
+            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.8, ease: "easeInOut" }} className={`w-full h-[60%] bg-linear-to-b from-[#051429] via-[#0A3D91] to-zinc-950`} />
+            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1, ease: "easeInOut" }} className={`w-full h-[85%] bg-linear-to-b from-[#051429] via-[#0A3D91] to-zinc-950`} />
+            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.8, ease: "easeInOut" }} className={`w-full h-[60%] bg-linear-to-b from-[#051429] via-[#0A3D91] to-zinc-950`} />
+            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.6, ease: "easeInOut" }} className={`w-full h-[80%] bg-linear-to-b from-[#051429] via-[#0A3D91] to-zinc-950`} />
+            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.3, ease: "easeInOut" }} className={`w-full h-full bg-linear-to-b from-[#051429] via-[#0A3D91] to-zinc-950`} />
+          </div> */}
+
+          <div className={`w-full h-screen absolute top-0 rounded-b-2xl flex justify-center items-center overflow-hidden`}>
+            <motion.video initial={{ opacity: 0 }} animate={{ opacity: 0.3 }} transition={{ delay: 0.4, duration: 0.4, ease: "easeInOut" }} src="https://www.pexels.com/download/video/33512869" autoPlay muted loop playsInline className={`w-full h-full object-cover`} />
           </div>
 
-          <motion.h1 initial={{ opacity: 0, filter: "blur(20px)" }} animate={{ opacity: 1, filter: "blur(0px)" }} transition={{ duration: 0.5, delay: 1.3, ease: "easeInOut" }} className={`w-full z-20 text-center md:text-start xl:px-10 md:px-6 font-bold text-white text-4xl lg:text-6xl xl:text-8xl font-lexend`}>Where Financial Expertise Meets Extraordinary Experience</motion.h1>
-          <motion.p initial={{ opacity: 0, filter: "blur(20px)" }} animate={{ opacity: 1, filter: "blur(0px)" }} transition={{ duration: 0.5, delay: 1.6, ease: "easeInOut" }} className={`w-full z-20 text-center md:text-start px-8 xl:px-10 md:px-6 font-imprima text-white text-[10px] md:text-[12px] lg:text-lg xl:text-xl mt-5`}>At Zenith Events & Financial Consultancy, we help businesses, organizations and individuals simplify complex financial decisions while delivering memorable events that leave lasting impressions.</motion.p>
+          <motion.h1 initial={{ opacity: 0, filter: "blur(20px)" }} animate={{ opacity: 1, filter: "blur(0px)" }} transition={{ duration: 0.5, delay: 1.3, ease: "easeInOut" }} className={`w-full z-20 text-center md:text-start xl:px-10 md:px-6 font-bold text-white text-4xl lg:text-6xl xl:text-8xl font-lexend`}>CRAFTING UNFORGETTABLE EXPERIENCES</motion.h1>
+          <motion.p initial={{ opacity: 0, filter: "blur(20px)" }} animate={{ opacity: 1, filter: "blur(0px)" }} transition={{ duration: 0.5, delay: 1.6, ease: "easeInOut" }} className={`w-full z-20 text-center md:text-start px-8 xl:px-10 md:px-6 font-imprima text-white text-[10px] md:text-[12px] lg:text-lg xl:text-xl mt-5`}>We design and execute high-impact brand activations and exceptional corporate and social events that leave a lasting impression.</motion.p>
+
+          <div className={`w-full h-[50%] bg-linear-to-t from-zinc-950 to-transparent z-10 absolute bottom-0`} />
         </section>
 
         {/* stats section */}

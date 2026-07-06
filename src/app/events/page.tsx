@@ -7,6 +7,7 @@ import Footer from "@/components/Footer";
 import { Activity, useEffect, useState } from "react";
 import EventCard from "@/components/EventCard";
 import { motion } from 'motion/react';
+import WhatsappPopup from "@/components/WhatsappPopup";
 
 function page() {
 
@@ -87,9 +88,10 @@ function page() {
       <div className={`w-full h-auto flex flex-col justify-start items-center relative overflow-hidden`}>
 
         <Navbar />
+        <WhatsappPopup/>
 
         {/* blur section */}
-        <div className={`w-full rounded-t-2xl ${visible ? "translate-y-0" : "translate-y-full"} duration-500 ease-in-out h-screen flex flex-col justify-center items-center fixed top-0 backdrop-blur-2xl bg-black/20 z-100`}>
+        <div onClick={() => setVisible(false)} className={`w-full rounded-t-2xl ${visible ? "translate-y-0" : "translate-y-full"} duration-500 ease-in-out h-screen flex flex-col justify-center items-center fixed top-0 backdrop-blur-2xl bg-black/20 z-100 px-5 py-7`}>
           <img src={popupPoster || ".."} className={`h-[70%] rounded-3xl`} />
           <p onClick={() => setVisible(false)} className={`w-auto px-10 py-3 text-center text-black font-prixima font-semibold bg-white rounded-md cursor-pointer active:opacity-75 duration-200 ease-in-out select-none mt-5`}>Close</p>
         </div>
@@ -103,7 +105,7 @@ function page() {
             <span onClick={() => setOption('past')} className={`w-auto px-5 py-2 select-none cursor-pointer rounded-full ${option === 'past' ? "bg-linear-to-br from-white via-gray-200 to-gray-400 font-semibold text-black" : "font-normal bg-transparent text-white"} duration-200 ease-in-out`}>Past</span>
           </motion.div>
 
-          <section className={`w-full mt-10 h-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 justify-items-start gap-8 px-2 lg:px-5`}>
+          <section className={`w-full mt-10 h-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 justify-items-start items-start gap-8 px-2 lg:px-5`}>
             <Activity mode={option === 'upcoming' ? "visible" : "hidden"}>
               {upcomingEvents.map((item, index) => {
                 return <EventCard key={index} thumbnail={item.thumbnail} name={item.name} desc={item.desc} date={item.date} id={item.id} link={item.link} location={item.location} expired={parseEventDate(item.date) < today} points={item.points} setVisible={() => { setVisible(!visible); setPopupPoster(item.poster) }} poster={item.poster} />
