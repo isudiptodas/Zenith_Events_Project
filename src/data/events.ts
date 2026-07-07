@@ -12,7 +12,7 @@ export const allEvents = [
         poster: `/assets/events/bounce.jpeg`,
         location: `Chetla Park Athletic Club`,
         thumbnail: `/assets/events/bounce-landscape.png`,
-        date: `5 July, 2026`,
+        date: `Coming Soon`,
         link: `https://docs.google.com/forms/d/e/1FAIpQLSd3TQ9NPmGctAHRuEqLXHcbvOcqz6u8Oqd-2DLaSYDz58h1TA/viewform`,
     },
     {

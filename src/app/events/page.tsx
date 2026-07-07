@@ -30,6 +30,12 @@ function page() {
   const parseEventDate = (dateString: string): Date => {
     const trimmed = dateString.trim();
 
+    // Format: "Coming soon"
+    if (/^coming\s+soon$/i.test(trimmed)) {
+      // Treat as a future event
+      return new Date(9999, 11, 31);
+    }
+
     // Format: "22 & 23 August, 2026"
     const multiDayMatch = trimmed.match(
       /^(\d+)\s*&\s*(\d+)\s+([A-Za-z]+),\s*(\d{4})$/
