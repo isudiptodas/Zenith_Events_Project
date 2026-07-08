@@ -7,12 +7,14 @@ import { businessSolutions, organizationSolutions, startupSolutions } from '../d
 import { RiGeminiFill } from "react-icons/ri";
 import { useRouter } from "next/navigation";
 import Footer from "@/components/Footer";
-import { motion } from 'motion/react'
+import { motion, AnimatePresence } from 'motion/react'
 import WhatsappPopup from "@/components/WhatsappPopup";
+import { ongoingEvents } from "@/data/ongoingEvents";
 
 function page() {
 
   const router = useRouter();
+  const [isOpen, setIsOpen] = useState(false);
 
   return (
     <>
@@ -38,11 +40,68 @@ function page() {
           </div> */}
 
           <div className={`w-full h-screen absolute top-0 rounded-b-2xl flex justify-center items-center overflow-hidden`}>
-            <motion.video initial={{ opacity: 0 }} animate={{ opacity: 0.3 }} transition={{ delay: 0.4, duration: 0.4, ease: "easeInOut" }} src="https://www.pexels.com/download/video/33512869" autoPlay muted loop playsInline className={`w-full h-full object-cover`} />
+            <motion.video initial={{ opacity: 0 }} animate={{ opacity: 0.3 }} transition={{ delay: 0.4, duration: 0.4, ease: "easeInOut" }} src="/assets/hero-video.mp4" autoPlay muted loop playsInline className={`w-full h-full object-cover`} />
           </div>
 
           <motion.h1 initial={{ opacity: 0, filter: "blur(20px)" }} animate={{ opacity: 1, filter: "blur(0px)" }} transition={{ duration: 0.5, delay: 1.3, ease: "easeInOut" }} className={`w-full z-20 text-center md:text-start xl:px-10 md:px-6 font-bold text-white text-4xl lg:text-6xl xl:text-8xl font-lexend`}>CRAFTING UNFORGETTABLE EXPERIENCES</motion.h1>
           <motion.p initial={{ opacity: 0, filter: "blur(20px)" }} animate={{ opacity: 1, filter: "blur(0px)" }} transition={{ duration: 0.5, delay: 1.6, ease: "easeInOut" }} className={`w-full z-20 text-center md:text-start px-8 xl:px-10 md:px-6 font-imprima text-white text-[10px] md:text-[12px] lg:text-lg xl:text-xl mt-5`}>We design and execute high-impact brand activations and exceptional corporate and social events that leave a lasting impression.</motion.p>
+
+          <div className="w-full z-20 flex justify-center lg:justify-start px-4 lg:px-6 xl:px-10 pt-10">
+            <div className="relative inline-block">
+              {/* Register Button */}
+              <motion.span
+                initial={{ opacity: 0, filter: "blur(20px)" }}
+                animate={{ opacity: 1, filter: "blur(0px)" }}
+                transition={{ duration: 0.5, delay: 1.7, ease: "easeInOut" }}
+                onClick={() => setIsOpen((prev) => !prev)}
+                className="rounded-full bg-white px-4 py-2 xl:px-6 xl:py-3 mt-4 xl:mt-6 text-[10px] xl:text-sm font-semibold text-black cursor-pointer select-none active:scale-95 duration-150 text-center"
+              >Register for ongoing events</motion.span>
+
+              <AnimatePresence>
+                {isOpen && (
+                  <motion.div
+                    initial={{
+                      opacity: 0,
+                      height: 0,
+                      y: -10,
+                    }}
+                    animate={{
+                      opacity: 1,
+                      height: "auto",
+                      y: 5,
+                    }}
+                    exit={{
+                      opacity: 0,
+                      height: 0,
+                      y: -10,
+                    }}
+                    transition={{
+                      duration: 0.35,
+                      ease: "easeInOut",
+                    }}
+                    className="absolute left-0 lg:left-0 top-full mt-2 z-20 rounded-xl bg-white shadow-xl w-fit min-w-full"
+                  >
+                    <div data-lenis-prevent className={`max-h-32 overflow-y-auto overscroll-contain p-[2px]`}>
+                      {ongoingEvents.map((item, index) => (
+                        <motion.p
+                          key={index}
+                          whileTap={{ scale: 0.98 }}
+                          onClick={() => {
+                            setIsOpen(false);
+                            // router.push(...)
+                          }}
+                          className="whitespace-nowrap w-full rounded-lg px-4 py-3 hover:pl-6 duration-200 ease-in-out text-sm text-black hover:bg-yellow-400 hover:font-semibold cursor-pointer"
+                        >
+                          {item.name}
+                        </motion.p>
+                      ))}
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+          </div>
+
 
           <div className={`w-full h-[50%] bg-linear-to-t from-zinc-950 to-transparent z-10 absolute bottom-0`} />
         </section>
@@ -52,21 +111,21 @@ function page() {
           {statGrids.map((item, index) => {
             return <motion.div initial={{ opacity: 0, filter: "blur(20px)" }} viewport={{ once: true }} whileInView={{ opacity: 1, filter: "blur(0px)" }} transition={{ duration: 0.3, delay: 0.2, ease: "easeInOut" }} key={index} className={`w-full rounded-lg bg-white/5 flex flex-col justify-center items-center px-5 py-5`}>
               <h2 className={`text-white font-prixima text-4xl xl:text-6xl font-bold select-none`}>{item.number}</h2>
-              <p className={`text-white font-prixima text-[10px] xl:text-lg mt-2 font-normal select-none`}>{item.text}</p>
+              <span className={`text-white font-prixima text-[10px] xl:text-lg mt-2 font-normal select-none`}>{item.text}</span>
             </motion.div>
           })}
         </section>
 
         {/* about section */}
         <section className={`w-full bg-zinc-950 h-auto flex flex-col justify-start items-center px-3 lg:px-8 py-10 md:pt-24`}>
-          <motion.h2 initial={{ opacity: 0, filter: "blur(20px)", x: -50 }} viewport={{ once: true }} whileInView={{ opacity: 1, filter: "blur(0px)", x: 0 }} transition={{ duration: 0.5, delay: 0.2, ease: "easeInOut" }} className={`w-full px-3 text-start text-3xl md:text-4xl lg:text-6xl font-bold font-lexend bg-linear-to-b from-yellow-300 to-yellow-800 bg-clip-text text-transparent select-none`}>About Us</motion.h2>
+          <motion.h1 initial={{ opacity: 0, filter: "blur(20px)", x: -50 }} viewport={{ once: true }} whileInView={{ opacity: 1, filter: "blur(0px)", x: 0 }} transition={{ duration: 0.5, delay: 0.2, ease: "easeInOut" }} className={`w-full px-3 text-start text-3xl md:text-4xl lg:text-6xl font-bold font-lexend bg-linear-to-b from-yellow-300 to-yellow-800 bg-clip-text text-transparent select-none`}>About Us</motion.h1>
           <motion.p initial={{ opacity: 0, filter: "blur(20px)", x: -50 }} viewport={{ once: true }} whileInView={{ opacity: 1, filter: "blur(0px)", x: 0 }} transition={{ duration: 0.5, delay: 0.3, ease: "easeInOut" }} className={`w-full px-3 text-white mt-3 lg:mt-6 font-prixima font-light text-[10px] md:text-[12px] xl:text-lg`}>Zenith Events & Financial Consultancy was founded with a vision to provide integrated business solutions that go beyond conventional consulting. We understand that every client has unique goals and challenges, which is why our approach combines strategic planning, financial expertise and flawless event execution.
             <br /><br />By focusing on innovation, transparency and long-term relationships, we strive to become a trusted partner that contributes to our clients’ growth and success.</motion.p>
         </section>
 
         {/* solutions section */}
         <section className={`w-full relative bg-zinc-950 h-auto flex flex-col justify-start items-center px-3 lg:px-8 py-10 overflow-hidden`}>
-          <motion.h2 initial={{ opacity: 0, filter: "blur(20px)", x: -50 }} viewport={{ once: true }} whileInView={{ opacity: 1, filter: "blur(0px)", x: 0 }} transition={{ duration: 0.5, delay: 0.2, ease: "easeInOut" }} className={`w-full px-3 text-start text-3xl md:text-4xl lg:text-6xl font-bold font-lexend bg-linear-to-b from-yellow-300 to-yellow-800 bg-clip-text text-transparent select-none`}>Explore our Solutions</motion.h2>
+          <motion.h1 initial={{ opacity: 0, filter: "blur(20px)", x: -50 }} viewport={{ once: true }} whileInView={{ opacity: 1, filter: "blur(0px)", x: 0 }} transition={{ duration: 0.5, delay: 0.2, ease: "easeInOut" }} className={`w-full px-3 text-start text-3xl md:text-4xl lg:text-6xl font-bold font-lexend bg-linear-to-b from-yellow-300 to-yellow-800 bg-clip-text text-transparent select-none`}>Explore our Solutions</motion.h1>
 
           {/* grids */}
           <div className={`w-full flex flex-col md:flex-row justify-between items-start gap-6 pt-8 md:px-3`}>

@@ -94,7 +94,7 @@ function page() {
       <div className={`w-full h-auto flex flex-col justify-start items-center relative overflow-hidden`}>
 
         <Navbar />
-        <WhatsappPopup/>
+        <WhatsappPopup />
 
         {/* blur section */}
         <div onClick={() => setVisible(false)} className={`w-full rounded-t-2xl ${visible ? "translate-y-0" : "translate-y-full"} duration-500 ease-in-out h-screen flex flex-col justify-center items-center fixed top-0 backdrop-blur-2xl bg-black/20 z-100 px-5 py-7`}>

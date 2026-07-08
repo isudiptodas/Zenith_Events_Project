@@ -65,7 +65,7 @@ function Footer() {
         <>
             <footer className={`w-full bg-zinc-950 h-auto flex flex-col justify-start items-center`}>
                 <div className={`w-full h-auto pt-10 pb-8 flex flex-col justify-center items-center bg-linear-to-b from-[#1E4AC2] via-zinc-950 to-zinc-950`}>
-                    <motion.h2 initial={{ opacity: 0, filter: "blur(20px)", y: 50 }} viewport={{ once: true }} whileInView={{ opacity: 1, filter: "blur(0px)", y: 0 }} transition={{ duration: 0.5, delay: 0.2, ease: "easeInOut" }} className={`w-full text-center text-white font-lexend text-3xl md:text-4xl lg:text-6xl font-semibold`}>For your any query</motion.h2>
+                    <motion.h1 initial={{ opacity: 0, filter: "blur(20px)", y: 50 }} viewport={{ once: true }} whileInView={{ opacity: 1, filter: "blur(0px)", y: 0 }} transition={{ duration: 0.5, delay: 0.2, ease: "easeInOut" }} className={`w-full text-center text-white font-lexend text-3xl md:text-4xl lg:text-6xl font-semibold`}>For your any query</motion.h1>
                     <motion.p initial={{ opacity: 0, filter: "blur(20px)", y: 50 }} viewport={{ once: true }} whileInView={{ opacity: 1, filter: "blur(0px)", y: 0 }} transition={{ duration: 0.5, delay: 0.2, ease: "easeInOut" }} className={`w-full mt-3 text-center text-white font-lexend text-[12px] lg:text-lg font-light`}>Let's Start A Conversation</motion.p>
 
                     <div className={`w-full flex flex-col lg:flex-row justify-between items-center lg:items-start gap-4 lg:px-10`}>
@@ -76,7 +76,7 @@ function Footer() {
                                     <p className={`font-semibold font-lexend text-lg text-white select-none`}>{item.name}</p>
                                     <div className={`w-[70%] my-3 h-[2px] bg-linear-to-r from-transparent via-[#4c7cff] to-transparent`} />
                                     {item.links.map((item, index) => {
-                                        return <span onClick={() => {
+                                        return <p onClick={() => {
                                             if (item.link.startsWith('https')) {
                                                 window.open(item.link, '_blank')
                                             }
@@ -86,7 +86,7 @@ function Footer() {
                                             else {
                                                 router.push(item.link)
                                             }
-                                        }} key={index} className={`cursor-pointer text-[10px] lg:text-[12px] mb-2 text-white font-light select-none`}>{item.name}</span>
+                                        }} key={index} className={`cursor-pointer w-auto text-[10px] lg:text-[12px] mb-2 text-white font-light select-none`}>{item.name}</p>
                                     })}
                                 </motion.div>
                             })}
@@ -98,7 +98,7 @@ function Footer() {
                             <input value={email} onChange={(e) => setEmail(e.target.value)} type="email" className={`w-full bg-zinc-800 py-3 px-4 rounded-full outline-none text-white font-prixima`} placeholder="Enter your email" />
                             <input value={contact} onChange={(e) => setContact(e.target.value)} type="string" className={`w-full bg-zinc-800 py-3 px-4 rounded-full outline-none text-white font-prixima`} placeholder="Enter your contact" />
                             <textarea value={message} onChange={(e) => setMessage(e.target.value)} className={`w-full h-36 bg-zinc-800 py-3 px-4 rounded-3xl outline-none text-white font-prixima`} placeholder="Enter your query / message" />
-                            <p onClick={sendQuery} className={`w-full rounded-full text-black bg-white py-3 text-center cursor-pointer active:opacity-65 duration-300 ease-in-out`}>{sending ? "Submitting..." : "Submit"}</p>
+                            <span onClick={sendQuery} className={`w-full rounded-full text-black bg-white py-3 text-center cursor-pointer active:opacity-65 duration-300 ease-in-out`}>{sending ? "Submitting..." : "Submit"}</span>
                         </motion.div>
                     </div>
                 </div>

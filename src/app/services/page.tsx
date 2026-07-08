@@ -38,7 +38,7 @@ function page() {
 
                       <div className={`w-full px-3 py-2 mt-2 grid grid-cols-1 lg:grid-cols-2 justify-items-center gap-3`}>
                         {item.points.map((point, index) => {
-                          return <span key={index} className={`w-full text-start text-white font-light select-none text-[10px] flex justify-start items-center gap-2`}><SiGooglegemini /> {point}</span>
+                          return <p key={index} className={`w-full text-start text-white font-light select-none text-[10px] flex justify-start items-center gap-2`}><SiGooglegemini /> {point}</p>
                         })}
                       </div>
                       <hr className={`w-full h-[2px] my-5 bg-zinc-700`} />
@@ -46,7 +46,7 @@ function page() {
                       <div className={`w-full flex justify-between items-start gap-3`}>
                         {item.stats.map((stat, index) => {
                           return <div key={index} className={`w-full px-3 py-3 rounded-lg border border-zinc-800 flex flex-col justify-center items-center gap-2`}>
-                            <p className={`text-yellow-500 font-lexend text-xl font-semibold`}>{stat.number}</p>
+                            <span className={`text-yellow-500 font-lexend text-xl font-semibold`}>{stat.number}</span>
                             <p className={`text-white text-center font-prixima text-[10px] font-normal`}>{stat.text}</p>
                           </div>
                         })}

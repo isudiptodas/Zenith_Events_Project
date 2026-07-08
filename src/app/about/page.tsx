@@ -13,7 +13,7 @@ function page() {
         <Navbar />
         <WhatsappPopup/>
 
-        <section className={`w-full z-20 md:w-[70%] mt-14 px-5 min-h-screen flex flex-col justify-start items-center`}>
+        <section className={`w-full z-20 pb-10 md:w-[70%] mt-14 px-5 min-h-screen flex flex-col justify-start items-center`}>
           <motion.h1 initial={{ opacity: 0, filter: "blur(20px)" }} animate={{ opacity: 1, filter: "blur(0px)" }} transition={{ duration: 0.3, delay: 0.3, ease: "easeInOut" }} className={`w-full text-center mb-3 font-bold text-4xl md:text-6xl font-lexend bg-linear-to-b from-yellow-300 to-yellow-800 bg-clip-text text-transparent select-none mt-16 lg:mt-20`}>ABOUT US</motion.h1>
           
           <motion.hr initial={{ opacity: 0, filter: "blur(20px)" }} animate={{ opacity: 1, filter: "blur(0px)" }} transition={{ duration: 0.3, delay: 0.3, ease: "easeInOut" }} className={`w-[80%] my-5 h-[2px] bg-linear-to-r from-transparent via-yellow-500 to-transparent`} />

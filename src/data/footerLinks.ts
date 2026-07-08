@@ -18,6 +18,10 @@ export const footerLinks = [
                 name: `Contact`,
                 link: `/contact`
             },
+            {
+                name: `Developer Login`,
+                link: `/dev-login`
+            },
         ]
     },
     {

@@ -31,12 +31,12 @@ function EventCard({ id, name, desc, location, date, poster, points, link, expir
           <p className={`w-full pt-2 pb-4 px-3 text-start text-white text-[12px] font-prixima select-none flex justify-start items-center gap-3 font-semibold`}> <FaLocationDot className={`text-lg`} /> {location}</p>
           <div className={`w-full flex flex-col justify-start items-center pt-2 pb-5 px-3 gap-3`}>
             {points?.map((item, index) => {
-              return <span key={index} className={`w-full px-3 py-2 rounded-md text-white text-[10px] select-none border border-zinc-800 bg-white/5`} >{item}</span>
+              return <p key={index} className={`w-full px-3 py-2 rounded-md text-white text-[10px] select-none border border-zinc-800 bg-white/5`} >{item}</p>
             })}
           </div>
           <div className={`w-full ${expired ? "hidden" : "block"} flex justify-between items-center gap-3 px-3`}>
-            <p onClick={() => window.open(link, '_blank')} className={`w-full ${link?.length > 0 ? "block" : "hidden"} mt-2 py-2 rounded-md bg-white text-black text-center cursor-pointer select-none mb-4 active:opacity-80 duration-200 ease-in-out`}>Register</p>
-            <p onClick={setVisible} className={`w-full ${poster ? "block" : "hidden"} mt-2 py-2 rounded-md bg-white text-black text-center cursor-pointer select-none mb-4 active:opacity-80 duration-200 ease-in-out`}>View Poster</p>
+            <span onClick={() => window.open(link, '_blank')} className={`w-full ${link?.length > 0 ? "block" : "hidden"} mt-2 py-2 rounded-md bg-white text-black text-center cursor-pointer select-none mb-4 active:opacity-80 duration-200 ease-in-out`}>Register</span>
+            <span onClick={setVisible} className={`w-full ${poster ? "block" : "hidden"} mt-2 py-2 rounded-md bg-white text-black text-center cursor-pointer select-none mb-4 active:opacity-80 duration-200 ease-in-out`}>View Poster</span>
           </div>
           <p className={`w-[90%] ${expired ? "block" : "hidden"} mt-2 py-2 rounded-md text-white text-center cursor-pointer select-none mb-4 active:opacity-80 duration-200 ease-in-out`}>Sorry! Event expired</p>
         </div>

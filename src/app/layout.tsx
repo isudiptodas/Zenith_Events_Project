@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { Toaster } from 'sonner';
+import CustomCursor from "@/components/CustomCursor";
+import LenisProvider from "@/components/LenisProvider";
 
 export const metadata: Metadata = {
   title: "Zenith Events & Financial Consultancy",
@@ -13,11 +15,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html
-      lang="en" suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning>
       <body suppressHydrationWarning>
-        <Toaster richColors position="top-center" />
-        {children}</body>
+        <LenisProvider>
+          <CustomCursor />
+          {children}
+        </LenisProvider>
+      </body>
     </html>
   );
 }
