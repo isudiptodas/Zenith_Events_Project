@@ -88,7 +88,7 @@ function page() {
                           whileTap={{ scale: 0.98 }}
                           onClick={() => {
                             setIsOpen(false);
-                            // router.push(...)
+                            router.push(item.link)
                           }}
                           className="whitespace-nowrap w-full rounded-lg px-4 py-3 hover:pl-6 duration-200 ease-in-out text-sm text-black hover:bg-yellow-400 hover:font-semibold cursor-pointer"
                         >
