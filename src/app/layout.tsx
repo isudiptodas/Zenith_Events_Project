@@ -19,6 +19,7 @@ export default function RootLayout({
       <body suppressHydrationWarning>
         <LenisProvider>
           <CustomCursor />
+          <Toaster richColors position="top-center" />
           {children}
         </LenisProvider>
       </body>

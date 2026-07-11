@@ -1,6 +1,9 @@
 'use client'
 
+import axios from "axios";
 import { useState } from "react";
+import { toast } from "sonner";
+import { IoIosCloudUpload } from "react-icons/io";
 
 function Bounce() {
 
@@ -28,6 +31,21 @@ function Bounce() {
   };
 
   const [formData, setFormData] = useState(initialFormData);
+  const [file, setFile] = useState<File | null>(null);
+  const [submitting, setSubmitting] = useState(false);
+  const preview = file ? URL.createObjectURL(file) : null;
+
+  const requiredFields = [
+    formData.teamName,
+    formData.player1Name,
+    formData.player1Contact,
+    formData.player2Name,
+    formData.player2Contact,
+    formData.player3Name,
+    formData.player3Contact,
+    formData.player4Name,
+    formData.player4Contact,
+  ];
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value, type, checked } = e.target;
@@ -37,6 +55,81 @@ function Bounce() {
       [name]: type === "checkbox" ? checked : value,
     }));
   };
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+
+    const MAX_SIZE = 3 * 1024 * 1024; // 3MB
+    const selectedFile = e.target.files?.[0];
+
+    if (!selectedFile) return;
+
+    if (!selectedFile.type.startsWith("image/")) {
+      e.target.value = "";
+      toast.error("Only images are allowed");
+      return;
+    }
+
+    if (selectedFile.size > MAX_SIZE) {
+      e.target.value = "";
+      toast.error("Screenshot must be under 3MB");
+      return;
+    }
+
+    setFile(selectedFile);
+  };
+
+  const removeFile = () => {
+    setFile(null);
+  };
+
+  const submitForm = async () => {
+    if (submitting) return;
+
+    if (!formData.agreeCancellation || !formData.agreeRules || !formData.confirmDetails) {
+      toast.error("Please approve the declarations");
+      return;
+    }
+    if (!file) {
+      toast.error("Please upload payment screenshot");
+      return;
+    }
+    // if (!formData.captainEmail) {
+    //   toast.error("Please add captain email");
+    //   return;
+    // }
+    // if (!formData.captainWhatsapp) {
+    //   toast.error("Please add captain whatsapp number");
+    //   return;
+    // }
+
+    // if (requiredFields.some(field => field.trim() === "")) {
+    //   toast.error("All fields are required");
+    //   return;
+    // }
+
+    const data = new FormData();
+    data.append('file', file);
+    data.append('data', JSON.stringify(formData));
+    data.append('type', 'bounce');
+    const id = toast.loading("Submitting...");
+
+    try {
+      setSubmitting(true);
+      const res = await axios.post(`/api/events/register`, data);
+      if(res.status === 200) {
+        toast.success("Form submitted");
+      }
+    } catch (error: any) {
+      setSubmitting(false);
+      toast.error("Something went wrong");
+    }
+    finally{
+      setSubmitting(false);
+      setFormData(initialFormData);
+      setFile(null);
+      toast.dismiss(id);
+    }
+  }
 
   return (
     <>
@@ -119,6 +212,30 @@ function Bounce() {
               value={formData.captainEmail}
               onChange={handleChange} type="text" className={`w-full bg-gray-200 mt-2 rounded-full py-3 px-4 focus:outline-orange-500 duration-300 ease-in-out`} placeholder="Enter captains email id" />
 
+            <p className={`w-full font-bold text-start select-none text-sm px-3 mt-5`}>Upload payment screenshot*</p>
+            <div className={`w-full group flex flex-col justify-center items-center px-3 py-4`}>
+              <div className={`w-full relative overflow-hidden flex flex-col justify-center items-center rounded-2xl border-2 border-dashed py-8 ${file === null ? "block" : "hidden"}`}>
+                <p className={`text-3xl group-hover:scale-125 duration-300 ease-in-out text-gray-400 `}><IoIosCloudUpload /></p>
+                <p className={`w-full select-none text-[12px] xl:text-sm text-center italic opacity-70`}>Select from device</p>
+                <input accept="image/*" onChange={handleFileChange} type="file" className={`absolute h-[200px] top-1/3 inset-0 text-5xl opacity-0`} />
+              </div>
+
+              <div className={`w-full mt-5 flex justify-center items-center overflow-hidden rounded-2xl`}>
+                {preview && (
+                  <img
+                    src={preview}
+                    alt="Preview"
+                    className="h-full rounded-lg object-cover"
+                  />
+                )}
+              </div>
+              <div className={`w-full ${file === null ? "hidden" : "block"} mt-5 flex flex-col justify-center items-center`}>
+                <p className={`w-full text-center text-[12px] lg:text-sm select-none`}>{file && file?.name}</p>
+                <p onClick={removeFile} className={`w-full bg-red-600 text-white select-none mt-3 active:opacity-70 duration-200 ease-in-out rounded-full text-center py-2`}>Remove image</p>
+              </div>
+
+            </div>
+
             <div className={`w-full px-3 mt-5 flex justify-start items-center gap-2`}>
               <input name="confirmDetails"
                 checked={formData.confirmDetails}
@@ -138,7 +255,7 @@ function Bounce() {
               <p className={`w-full text-start text-[12px] xl:text-lg select-none`}>Please note that cancellation charges may apply.</p>
             </div>
 
-            <span className={`w-full py-3 rounded-full active:opacity-85 duration-150 ease-in-out text-center mt-5 bg-linear-to-b from-orange-300 to-orange-600 text-white font-semibold text-sm select-none`}>Submit Form</span>
+            <span onClick={submitForm} className={`w-full py-3 rounded-full active:opacity-85 duration-150 ease-in-out text-center mt-5 bg-linear-to-b from-orange-300 to-orange-600 text-white font-semibold text-sm select-none`}>Submit Form</span>
           </div>
         </div>
       </div>
