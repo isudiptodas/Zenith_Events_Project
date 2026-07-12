@@ -3,6 +3,7 @@
 import { MdDateRange } from "react-icons/md";
 import { FaLocationDot } from "react-icons/fa6";
 import { motion } from 'motion/react';
+import { useRouter } from "next/navigation";
 
 type eventProps = {
   id: number, 
@@ -19,6 +20,9 @@ type eventProps = {
 }
 
 function EventCard({ id, name, desc, location, date, poster, points, link, expired, thumbnail, setVisible }: eventProps) {
+
+  const router = useRouter();
+
   return (
     <>
       <motion.div initial={{ opacity: 0, filter: "blur(20px)" }} viewport={{ once: true }} whileInView={{ opacity: 1, filter: "blur(0px)" }} transition={{ duration: 0.3, delay: 0.2, ease: "easeInOut" }} className={`w-full group cursor-pointer h-auto flex flex-col justify-start items-center rounded-2xl ${expired ? "bg-linear-to-br from-white via-gray-200 to-gray-400" : "bg-linear-to-b from-[#FFC107] via-blue-500 to-blue-800"} pt-1 px-1 pb-8 relative overflow-hidden`}>
@@ -35,7 +39,7 @@ function EventCard({ id, name, desc, location, date, poster, points, link, expir
             })}
           </div>
           <div className={`w-full ${expired ? "hidden" : "block"} flex justify-between items-center gap-3 px-3`}>
-            <span onClick={() => window.open(link, '_blank')} className={`w-full ${link?.length > 0 ? "block" : "hidden"} mt-2 py-2 rounded-md bg-white text-black text-center cursor-pointer select-none mb-4 active:opacity-80 duration-200 ease-in-out`}>Register</span>
+            <span onClick={() => router.push(link)} className={`w-full ${link?.length > 0 ? "block" : "hidden"} mt-2 py-2 rounded-md bg-white text-black text-center cursor-pointer select-none mb-4 active:opacity-80 duration-200 ease-in-out`}>Register</span>
             <span onClick={setVisible} className={`w-full ${poster ? "block" : "hidden"} mt-2 py-2 rounded-md bg-white text-black text-center cursor-pointer select-none mb-4 active:opacity-80 duration-200 ease-in-out`}>View Poster</span>
           </div>
           <p className={`w-[90%] ${expired ? "block" : "hidden"} mt-2 py-2 rounded-md text-white text-center cursor-pointer select-none mb-4 active:opacity-80 duration-200 ease-in-out`}>Sorry! Event expired</p>

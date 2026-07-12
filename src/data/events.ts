@@ -13,7 +13,7 @@ export const allEvents = [
         location: `Chetla Park Athletic Club`,
         thumbnail: `/assets/events/bounce-landscape.png`,
         date: `Coming Soon`,
-        link: `https://docs.google.com/forms/d/e/1FAIpQLSd3TQ9NPmGctAHRuEqLXHcbvOcqz6u8Oqd-2DLaSYDz58h1TA/viewform`,
+        link: `/register/bounce`,
     },
     {
         id: 2,
@@ -29,7 +29,7 @@ export const allEvents = [
         location: `Ahindra Mancha`,
         thumbnail: `/assets/events/udbhav-landscape.png`,
         date: `22 & 23 August, 2026`,
-        link: ``,
+        link: `/register/udbhav`,
     },
     {
         id: 3,

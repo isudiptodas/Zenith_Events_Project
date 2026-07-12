@@ -93,19 +93,19 @@ function Bounce() {
       toast.error("Please upload payment screenshot");
       return;
     }
-    // if (!formData.captainEmail) {
-    //   toast.error("Please add captain email");
-    //   return;
-    // }
-    // if (!formData.captainWhatsapp) {
-    //   toast.error("Please add captain whatsapp number");
-    //   return;
-    // }
+    if (!formData.captainEmail) {
+      toast.error("Please add captain email");
+      return;
+    }
+    if (!formData.captainWhatsapp) {
+      toast.error("Please add captain whatsapp number");
+      return;
+    }
 
-    // if (requiredFields.some(field => field.trim() === "")) {
-    //   toast.error("All fields are required");
-    //   return;
-    // }
+    if (requiredFields.some(field => field.trim() === "")) {
+      toast.error("All fields are required");
+      return;
+    }
 
     const data = new FormData();
     data.append('file', file);
@@ -121,7 +121,7 @@ function Bounce() {
       }
     } catch (error: any) {
       setSubmitting(false);
-      toast.error("Something went wrong");
+      toast.error(error?.response?.data?.message || "Something went wrong.");
     }
     finally{
       setSubmitting(false);
@@ -258,7 +258,7 @@ function Bounce() {
             <span onClick={submitForm} className={`w-full py-3 rounded-full active:opacity-85 duration-150 ease-in-out text-center mt-5 bg-linear-to-b from-orange-300 to-orange-600 text-white font-semibold text-sm select-none`}>Submit Form</span>
           </div>
         </div>
-      </div>
+      </div> 
     </>
   )
 }
