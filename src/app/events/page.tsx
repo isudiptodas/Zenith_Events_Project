@@ -111,16 +111,22 @@ function page() {
             <span onClick={() => setOption('past')} className={`w-auto px-5 py-2 select-none cursor-pointer rounded-full ${option === 'past' ? "bg-linear-to-br from-white via-gray-200 to-gray-400 font-semibold text-black" : "font-normal bg-transparent text-white"} duration-200 ease-in-out`}>Past</span>
           </motion.div>
 
-          <section className={`w-full mt-10 h-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 justify-items-start items-start gap-8 px-2 lg:px-5`}>
+          <section className={`w-full ${option === 'past' && pastEvents.length === 0 ? "flex flex-col justify-center items-center" : "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 justify-items-start items-start"} mt-10 h-auto gap-8 px-2 lg:px-5`}>
             <Activity mode={option === 'upcoming' ? "visible" : "hidden"}>
               {upcomingEvents.map((item, index) => {
-                return <EventCard key={index} thumbnail={item.thumbnail} name={item.name} desc={item.desc} date={item.date} id={item.id} link={item.link} location={item.location} expired={parseEventDate(item.date) < today} points={item.points} setVisible={() => { setVisible(!visible); setPopupPoster(item.poster) }} poster={item.poster} />
+                return <EventCard key={index} thumbnail={item.thumbnail} video={item.video} name={item.name} desc={item.desc} date={item.date} id={item.id} link={item.link} location={item.location} expired={parseEventDate(item.date) < today} points={item.points} setVisible={() => { setVisible(!visible); setPopupPoster(item.poster) }} poster={item.poster} />
               })}
             </Activity>
             <Activity mode={option === 'past' ? "visible" : "hidden"}>
               {pastEvents.map((item, index) => {
-                return <EventCard key={index} thumbnail={item.thumbnail} name={item.name} desc={item.desc} date={item.date} id={item.id} link={item.link} location={item.location} expired={parseEventDate(item.date) < today} points={item.points} setVisible={() => { setVisible(!visible); setPopupPoster(item.poster) }} poster={item.poster} />
+                return <EventCard key={index} thumbnail={item.thumbnail} video={item.video} name={item.name} desc={item.desc} date={item.date} id={item.id} link={item.link} location={item.location} expired={parseEventDate(item.date) < today} points={item.points} setVisible={() => { setVisible(!visible); setPopupPoster(item.poster) }} poster={item.poster} />
               })}
+
+              <div className={`w-full pb-16 relative overflow-hidden h-auto flex flex-col justify-center items-center ${pastEvents.length > 0 ? "hidden" : "block"}`}>
+                  <motion.img initial={{opacity: 0, filter: "blur(20px)"}} animate={{opacity: 1, filter: "blur(0px)"}} transition={{duration: 0.3, ease: "easeInOut", delay: 0.7}} src={`/assets/empty.png`} className={`h-56`} />
+                  <motion.p initial={{opacity: 0, filter: "blur(20px)"}} animate={{opacity: 0.4, filter: "blur(0px)"}} transition={{duration: 0.3, ease: "easeInOut", delay: 0.7}} className={`text-white w-full text-center opacity-20 select-none text-3xl `}>No Past Events Found!</motion.p>
+                  <div className={`h-full w-full absolute top-0 bg-transparent`} />
+              </div>
             </Activity>
           </section>
         </section>
