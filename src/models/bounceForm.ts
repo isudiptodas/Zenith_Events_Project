@@ -72,6 +72,12 @@ const bounceSchema = new mongoose.Schema(
       type: Boolean,
       required: true,
     },
+    registrationId: {
+      type: String,
+      required: true,
+      unique: true,
+      trim: true,
+    },
   },
   {
     timestamps: true,

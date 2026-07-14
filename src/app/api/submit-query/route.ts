@@ -3,7 +3,6 @@ import { ZenithEmailTemplate } from '@/components/ZenithEmailTemplate'
 import { NextRequest, NextResponse } from 'next/server';
 import { Resend } from 'resend';
 import React from 'react';
-import dns from "dns/promises";
 
 const resend = new Resend(process.env.RESEND_API_KEY as string);
 
@@ -12,17 +11,8 @@ export async function POST(req: NextRequest) {
     const body = await req.json();
     const { name, contact, email, message } = body;
 
-    // const domain = email.split("@")[1];
 
     try {
-        // const records = await dns.resolveMx(domain);
-
-        // if (records.length === 0) {
-        //     return NextResponse.json({
-        //         success: false,
-        //         message: `Email domain cannot receive emails`
-        //     }, { status: 400 });
-        // }
 
         // send mail to organization
         const { data, error } = await resend.emails.send({

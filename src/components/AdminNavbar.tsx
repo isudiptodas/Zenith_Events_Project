@@ -35,6 +35,7 @@ function AdminNavbar() {
 
                 <div className={`w-auto xl:flex justify-center items-center gap-4 pr-7 hidden`}>
                     <Link href='/admin/home' className={`w-auto px-5 py-2 text-lg rounded-full ${pathname === '/admin/home' ? "text-yellow-500 border-yellow-500" : "text-white border-transparent"} border-b-2 select-none`}>Home</Link>
+                    <Link href='/admin/grievance' className={`w-auto px-5 py-2 text-lg rounded-full ${pathname === '/admin/grievance' ? "text-yellow-500 border-yellow-500" : "text-white border-transparent"} border-b-2 select-none`}>Grievance</Link>
                     <Link href='/admin/change-password' className={`w-auto px-5 py-2 text-lg rounded-full ${pathname === '/admin/change-password' ? "text-yellow-500 border-yellow-500" : "text-white border-transparent"} border-b-2 select-none`}>Change Password</Link>
                     <p onClick={logout} className={`w-auto px-5 py-2 text-lg rounded-full text-red-500 select-none`}>Logout</p>
                 </div>
@@ -46,6 +47,7 @@ function AdminNavbar() {
 
                 <div className={`w-full flex flex-col justify-start items-center pt-36 px-4`}>
                     <Link href='/admin/home' className={`w-full mb-3 select-none text-start pl-5 py-2 ${pathname === '/admin/home' ? "font-semibold text-yellow-500 border-yellow-500" : "font-normal border-l-transparent text-white"} border-l-4 text-3xl`}>Home</Link>
+                    <Link href='/admin/grievance' className={`w-full mb-3 select-none text-start pl-5 py-2 ${pathname === '/admin/grievance' ? "font-semibold text-yellow-500 border-yellow-500" : "font-normal border-l-transparent text-white"} border-l-4 text-3xl`}>Grievance</Link>
                     <Link href='/admin/change-password' className={`w-full mb-3 select-none text-start pl-5 py-2 ${pathname === '/admin/change-password' ? "font-semibold text-yellow-500 border-yellow-500" : "font-normal border-l-transparent text-white"} border-l-4 text-3xl`}>Change Password</Link>
                     <p onClick={logout} className={`w-full select-none text-start pl-5 py-2 text-red-500 text-3xl`}>Logout</p>
                 </div>

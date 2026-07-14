@@ -4,6 +4,7 @@ import axios from "axios";
 import { useState } from "react";
 import { toast } from "sonner";
 import { IoIosCloudUpload } from "react-icons/io";
+import { AnimatePresence, motion } from "framer-motion";
 
 function Bounce() {
 
@@ -33,6 +34,8 @@ function Bounce() {
   const [formData, setFormData] = useState(initialFormData);
   const [file, setFile] = useState<File | null>(null);
   const [submitting, setSubmitting] = useState(false);
+  const [showRegistrationModal, setShowRegistrationModal] = useState(false);
+  const [registrationId, setRegistrationId] = useState("");
   const preview = file ? URL.createObjectURL(file) : null;
 
   const requiredFields = [
@@ -117,7 +120,8 @@ function Bounce() {
       setSubmitting(true);
       const res = await axios.post(`/api/events/register`, data);
       if(res.status === 200) {
-        toast.success("Form submitted");
+        setRegistrationId(res.data.registrationId);
+        setShowRegistrationModal(true);
       }
     } catch (error: any) {
       setSubmitting(false);
@@ -192,7 +196,7 @@ function Bounce() {
                 <input name="player4Name"
                   value={formData.player4Name}
                   onChange={handleChange} type="text" className={`w-full bg-gray-200 mt-2 rounded-full py-3 px-4 focus:outline-orange-500 duration-300 ease-in-out`} placeholder="Enter player 4 name" />
-
+ 
 
                 <p className={`w-full font-bold text-start select-none text-sm px-3 mt-5`}>Player 4 - Contact*</p>
                 <input name="player4Contact"
@@ -211,6 +215,10 @@ function Bounce() {
             <input name="captainEmail"
               value={formData.captainEmail}
               onChange={handleChange} type="text" className={`w-full bg-gray-200 mt-2 rounded-full py-3 px-4 focus:outline-orange-500 duration-300 ease-in-out`} placeholder="Enter captains email id" />
+
+            <p className={`w-full font-bold text-start select-none text-sm px-3 mt-7`}>Scan this QR code to make the payment of ₹1250/-</p>
+            <img src="/assets/payment-qr.jpeg" className={`h-56`} />
+
 
             <p className={`w-full font-bold text-start select-none text-sm px-3 mt-5`}>Upload payment screenshot*</p>
             <div className={`w-full group flex flex-col justify-center items-center px-3 py-4`}>
@@ -258,6 +266,19 @@ function Bounce() {
             <span onClick={submitForm} className={`w-full py-3 rounded-full active:opacity-85 duration-150 ease-in-out text-center mt-5 bg-linear-to-b from-orange-300 to-orange-600 text-white font-semibold text-sm select-none`}>Submit Form</span>
           </div>
         </div>
+
+        <AnimatePresence>
+          {showRegistrationModal && (
+            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.2 }} className={`fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50 p-4`} onClick={() => setShowRegistrationModal(false)}>
+              <motion.div initial={{ scale: 0.8, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} exit={{ scale: 0.8, opacity: 0 }} transition={{ duration: 0.2 }} onClick={(e) => e.stopPropagation()} className={`bg-white rounded-2xl p-6 lg:p-8 flex flex-col gap-4 items-center max-w-sm w-full`}>
+                <p className={`text-center text-lg lg:text-xl font-bold text-gray-800`}>Your Registration ID</p>
+                <p className={`text-center text-2xl lg:text-3xl font-bold text-orange-600 break-all`}>{registrationId}</p>
+                <p className={`text-center text-sm lg:text-base text-gray-600 mt-2`}>Save this ID for future references</p>
+                <button onClick={() => setShowRegistrationModal(false)} className={`w-full mt-4 py-3 rounded-lg bg-linear-to-b from-yellow-400 to-orange-500 duration-200 text-white font-semibold`}>Ok, understood</button>
+              </motion.div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div> 
     </>
   )

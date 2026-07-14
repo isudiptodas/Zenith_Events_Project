@@ -10,6 +10,7 @@ export interface UdbhavForm {
     age?: string;
     choreographer?: string;
     paymentScreenshot?: string;
+    registrationId: string;
     createdAt: string;
     updatedAt: string;
 }

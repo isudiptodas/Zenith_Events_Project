@@ -155,32 +155,32 @@ export const services = [
       }
     ]
   },
-  {
-    id: 7,
-    title: "Our On Going Events",
-    subtext: "Be a part of our ongoing events.",
-    video: `/assets/service-videos/branding.mp4`,
-    points: [
-      "Bellissima",
-      "Careerscope",
-      "Udbhav",
-      "KBC"
-    ],
-    stats: [
-      {
-        number: "60",
-        text: "Members Enrolled"
-      },
-      {
-        number: "5K",
-        text: "Audience Reached"
-      },
-      {
-        number: "96%",
-        text: "Audience Satisfaction"
-      }
-    ]
-  },
+  // {
+  //   id: 7,
+  //   title: "Our On Going Events",
+  //   subtext: "Be a part of our ongoing events.",
+  //   video: `/assets/service-videos/branding.mp4`,
+  //   points: [
+  //     "Bellissima",
+  //     "Careerscope",
+  //     "Udbhav",
+  //     "KBC"
+  //   ],
+  //   stats: [
+  //     {
+  //       number: "60",
+  //       text: "Members Enrolled"
+  //     },
+  //     {
+  //       number: "5K",
+  //       text: "Audience Reached"
+  //     },
+  //     {
+  //       number: "96%",
+  //       text: "Audience Satisfaction"
+  //     }
+  //   ]
+  // },
   {
     id: 8,
     title: "Zenithians",

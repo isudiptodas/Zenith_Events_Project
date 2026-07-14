@@ -9,7 +9,7 @@ export async function GET(req: NextRequest) {
 
     try {
         const bounce = await BounceForm.find();
-        const udbhav = await BounceForm.find();
+        const udbhav = await UdbhavForm.find();
 
         return NextResponse.json({
             success: true,

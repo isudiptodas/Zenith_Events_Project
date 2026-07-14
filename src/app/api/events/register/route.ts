@@ -6,8 +6,24 @@ import React from 'react';
 import { EventConfirmationTemplate } from '@/components/EventConfirmationTemplate';
 import { Resend } from "resend";
 import { UdbhavForm } from '@/models/udbhavForm';
+import { v4 as uuidv4 } from 'uuid';
 
-const resend = new Resend(process.env.RESEND_API_KEY as string);
+//const resend = new Resend(process.env.RESEND_API_KEY as string);
+
+const generateUniqueRegistrationId = async (): Promise<string> => {
+    let registrationId = uuidv4();
+    let exists = true;
+    while (exists) {
+        const bounce = await BounceForm.findOne({ registrationId });
+        const udbhav = await UdbhavForm.findOne({ registrationId });
+        if (!bounce && !udbhav) {
+            exists = false;
+        } else {
+            registrationId = uuidv4();
+        }
+    }
+    return registrationId;
+};
 
 export async function POST(req: NextRequest) {
 
@@ -34,6 +50,7 @@ export async function POST(req: NextRequest) {
             });
 
             const url = uploadedImage.url;
+            const registrationId = await generateUniqueRegistrationId();
 
             const players = [
                 {
@@ -64,32 +81,34 @@ export async function POST(req: NextRequest) {
                 confirmDetails: data.confirmDetails,
                 agreeRules: data.agreeRules,
                 agreeCancellation: data.agreeCancellation,
+                registrationId,
             });
             await form.save();
 
             //send mail to user
-            const { data: Data, error: err } = await resend.emails.send({
-                from: 'Zenith Events & Financial Consultancy <events@zefc.in>',
-                to: [data.captainEmail],
-                subject: 'Event Registration Confirmed',
-                react: React.createElement(EventConfirmationTemplate, {
-                    name: data.Player1Name,
-                    email: data.captainEmail,
-                    eventName: type as string
-                }),
-            });
+            // const { data: Data, error: err } = await resend.emails.send({
+            //     from: 'Zenith Events & Financial Consultancy <events@zefc.in>',
+            //     to: [data.captainEmail],
+            //     subject: 'Event Registration Confirmed',
+            //     react: React.createElement(EventConfirmationTemplate, {
+            //         name: data.Player1Name,
+            //         email: data.captainEmail,
+            //         eventName: type as string
+            //     }),
+            // });
 
-            if (err) {
-                console.log(err);
-                return NextResponse.json({
-                    success: false,
-                    message: `Could not sent mail`
-                }, { status: 503 });
-            }
+            // if (err) {
+            //     console.log(err);
+            //     return NextResponse.json({
+            //         success: false,
+            //         message: `Could not sent mail`
+            //     }, { status: 503 });
+            // }
 
             return NextResponse.json({
                 success: true,
-                message: `Form submitted`
+                message: `Form submitted`,
+                registrationId
             }, { status: 200 });
         } catch (error) {
             console.log(`ERROR -> ${error}`);
@@ -115,6 +134,7 @@ export async function POST(req: NextRequest) {
             });
 
             const url = uploadedImage.url;
+            const registrationId = await generateUniqueRegistrationId();
 
             const registration = await UdbhavForm.create({
                 category: data.category,
@@ -126,31 +146,33 @@ export async function POST(req: NextRequest) {
                 class: data.class,
                 age: data.age,
                 choreographer: data.choreographer,
-                paymentScreenshot: url
+                paymentScreenshot: url,
+                registrationId,
             });
 
-            // send mail to user
-            const { data: Data, error: err } = await resend.emails.send({
-                from: 'Zenith Events & Financial Consultancy <events@zefc.in>',
-                to: [data.email],
-                subject: 'Event Registration Confirmed',
-                react: React.createElement(EventConfirmationTemplate, {
-                    email: data.email,
-                    eventName: type as string
-                }),
-            });
+            //send mail to user
+            // const { data: Data, error: err } = await resend.emails.send({
+            //     from: 'Zenith Events & Financial Consultancy <events@zefc.in>',
+            //     to: [data.email],
+            //     subject: 'Event Registration Confirmed',
+            //     react: React.createElement(EventConfirmationTemplate, {
+            //         email: data.email,
+            //         eventName: type as string
+            //     }),
+            // });
 
-            if (err) {
-                console.log(err);
-                return NextResponse.json({
-                    success: false,
-                    message: `Could not sent mail`
-                }, { status: 503 });
-            }
+            // if (err) {
+            //     console.log(err);
+            //     return NextResponse.json({
+            //         success: false,
+            //         message: `Could not sent mail`
+            //     }, { status: 503 });
+            // }
 
             return NextResponse.json({
                 success: true,
-                message: `Form submitted`
+                message: `Form submitted`,
+                registrationId
             }, { status: 200 });
         } catch (error) {
             console.log(`ERROR -> ${error}`);

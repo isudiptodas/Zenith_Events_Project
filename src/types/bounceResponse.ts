@@ -5,22 +5,16 @@ export interface Player {
 
 export interface BounceForm {
   _id: string;
-
   teamName: string;
-
   players: Player[];
-
   captainWhatsapp: string;
   captainEmail: string;
-
   paymentScreenshot: string;
-
   type: string;
-
   confirmDetails: boolean;
   agreeRules: boolean;
   agreeCancellation: boolean;
-
+  registrationId: string;
   createdAt: string;
   updatedAt: string;
 }

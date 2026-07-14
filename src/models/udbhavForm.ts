@@ -11,6 +11,7 @@ export interface IUdbhav extends Document {
     age: string;
     choreographer?: string;
     paymentScreenshot: string;
+    registrationId: string;
 }
 
 const udbhavSchema = new Schema<IUdbhav>({
@@ -53,6 +54,11 @@ const udbhavSchema = new Schema<IUdbhav>({
     paymentScreenshot: {
         type: String,
         required: true
+    },
+    registrationId: {
+        type: String,
+        required: true,
+        unique: true
     }
 }, {
     timestamps: true

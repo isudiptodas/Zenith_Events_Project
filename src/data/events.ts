@@ -12,7 +12,7 @@ export const allEvents = [
         poster: `/assets/events/bounce.jpeg`,
         location: `Chetla Park Athletic Club`,
         thumbnail: `/assets/events/bounce-landscape.png`,
-        video: ``,
+        video: `https://media.zefc.in/zenith-events/bounce.mp4`,
         date: `Coming Soon`,
         link: `/register/bounce`,
     },
@@ -26,7 +26,7 @@ export const allEvents = [
             'Both men & women teams',
             'Meals provided'
         ],
-        poster: `/assets/events/udbhav.jpg`,
+        poster: `/assets/events/udbhav.png`,
         location: `Ahindra Mancha`,
         thumbnail: `/assets/events/udbhav-landscape.png`,
         video: `https://media.zefc.in/zenith-events/udbhav.mp4`,

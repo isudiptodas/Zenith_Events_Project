@@ -32,6 +32,8 @@ function Udbhav() {
     const selectedSubCategory = selectedCategory?.subCategories.find(item => item.name === formData.subCategory);
     const [preview, setPreview] = useState<string>("");
     const [submitting, setSubmitting] = useState(false);
+    const [showRegistrationModal, setShowRegistrationModal] = useState(false);
+    const [registrationId, setRegistrationId] = useState("");
 
     const handleSelection = (type: "category" | "subcategory", value: string) => {
 
@@ -88,7 +90,7 @@ function Udbhav() {
 
     const submitForm = async () => {
 
-        if(submitting) return;
+        if (submitting) return;
 
         if (!formData.category) return toast.error("Please select category.");
         if (!formData.subCategory) return toast.error("Please select sub category.");
@@ -126,20 +128,20 @@ function Udbhav() {
                 age: formData.age,
                 choreographer: formData.choreographer
             }));
+            uploadData.append("type", "udbhav");
 
-            const res = await axios.post("/api/events/register", {
-                formData, type: "udbhav"
-            });
+            const res = await axios.post("/api/events/register", uploadData);
 
             console.log(res.data);
-            if(res.status === 200){
-                toast.success("Form Submitted");
+            if (res.status === 200) {
+                setRegistrationId(res.data.registrationId);
+                setShowRegistrationModal(true);
             }
 
         } catch (error: any) {
             toast.error(error?.response?.data?.message || "Something went wrong.");
         }
-        finally{
+        finally {
             toast.dismiss(id);
             setSubmitting(false);
             setFormData(initialFormData);
@@ -294,6 +296,11 @@ function Udbhav() {
                                 </div>
                             </div>
 
+                            {selectedSubCategory && <div className={`w-full flex flex-col justify-start items-center`}>
+                                <p className={`w-full font-bold text-start select-none text-sm px-3 mt-7`}>Scan this QR code to make the payment </p>
+                                <img src="/assets/payment-qr.jpeg" className={`h-56`} />
+                            </div>}
+
                             <div className={`w-full mt-8`}>
 
                                 <p className={`font-bold text-sm px-3`}>Payment Screenshot*</p>
@@ -332,6 +339,19 @@ function Udbhav() {
 
                 </div>
             </div>
+
+        <AnimatePresence>
+          {showRegistrationModal && (
+            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.2 }} className={`fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50 p-4`} onClick={() => setShowRegistrationModal(false)}>
+              <motion.div initial={{ scale: 0.8, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} exit={{ scale: 0.8, opacity: 0 }} transition={{ duration: 0.2 }} onClick={(e) => e.stopPropagation()} className={`bg-white rounded-2xl p-6 lg:p-8 flex flex-col gap-4 items-center max-w-sm w-full`}>
+                <p className={`text-center text-lg lg:text-xl font-bold text-gray-800`}>Your Registration ID</p>
+                <p className={`text-center text-2xl lg:text-3xl font-bold text-blue-600 break-all`}>{registrationId}</p>
+                <p className={`text-center text-sm lg:text-base text-gray-600 mt-2`}>Save this ID for future references</p>
+                <button onClick={() => setShowRegistrationModal(false)} className={`w-full mt-4 py-3 rounded-lg bg-gradient-to-r from-yellow-400 via-orange-500 to-blue-500 hover:opacity-90 duration-200 text-white font-semibold`}>Ok, understood</button>
+              </motion.div>
+            </motion.div>
+          )}
+        </AnimatePresence>
 
         </>
     )
