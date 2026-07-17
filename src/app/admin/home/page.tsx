@@ -6,7 +6,7 @@ import { BounceForm } from "@/types/bounceResponse";
 import axios from "axios";
 import { motion, AnimatePresence } from "framer-motion";
 import { FaChevronDown } from "react-icons/fa";
-import { FiEdit, FiDownload } from "react-icons/fi";
+import { FiEdit, FiDownload, FiTrash2 } from "react-icons/fi";
 import { UdbhavForm } from '@/types/udbhavResponse';
 import { udbhavEvents } from "@/data/OngoingEvents/udbhav";
 import { utils, writeFile } from 'xlsx';
@@ -29,6 +29,9 @@ function page() {
     const [editingId, setEditingId] = useState<string | null>(null);
     const [editingType, setEditingType] = useState<"bounce" | "udbhav" | null>(null);
     const [updating, setUpdating] = useState(false);
+    const [showDeleteModal, setShowDeleteModal] = useState(false);
+    const [deleteTarget, setDeleteTarget] = useState<{type: "bounce" | "udbhav", id: string} | null>(null);
+    const [deleting, setDeleting] = useState(false);
 
     const filteredUdbhavResponses = udbhavResponses?.filter(item => {
         if (!selectedCategory || !selectedSubCategory) return false;
@@ -135,6 +138,39 @@ function page() {
         }
         finally{
             setUpdating(false);
+            toast.dismiss(id);
+        }
+    };
+
+    const handleDeleteClick = (item: any, type: "bounce" | "udbhav") => {
+        setDeleteTarget({ type, id: item._id });
+        setShowDeleteModal(true);
+    };
+
+    const handleDeleteConfirm = async () => {
+        if(deleting || !deleteTarget) return;
+        const id = toast.loading("Deleting row...");
+        try {
+            setDeleting(true);
+            const res = await axios.delete('/api/events/delete', {
+                data: {
+                    type: deleteTarget.type,
+                    id: deleteTarget.id
+                }
+            });
+            if (res.status === 200) {
+                setShowDeleteModal(false);
+                setDeleteTarget(null);
+                const refreshRes = await axios.get(`/api/events/view`, { withCredentials: true });
+                setBounceResponses(refreshRes.data.bounce);
+                setUdbhavResponses(refreshRes.data.udbhav);
+                toast.success("Row deleted");
+            }
+        } catch (error: any) {
+            toast.error(error?.response?.data?.message || 'Error deleting registration');
+        }
+        finally{
+            setDeleting(false);
             toast.dismiss(id);
         }
     };
@@ -318,7 +354,12 @@ function page() {
                                                             <td className={`px-4 py-4 text-[11px] lg:text-sm text-center text-zinc-300 whitespace-nowrap`}>{item.type}</td>
                                                             <td className={`px-4 py-4 text-center whitespace-nowrap`}><a href={item.paymentScreenshot} target="_blank" className={`px-4 py-2 rounded-lg bg-blue-600 hover:bg-blue-500 duration-200 text-white text-[10px] lg:text-xs font-medium`}>View</a></td>
                                                             <td className={`px-4 py-4 text-[11px] lg:text-sm text-center text-zinc-300 whitespace-nowrap`}>{new Date(item.createdAt).toLocaleDateString("en-IN", { day: "2-digit", month: "short", year: "numeric" })}</td>
-                                                            <td className={`px-4 py-4 text-center whitespace-nowrap`}><button onClick={() => handleEditClick(item, 'bounce')} className={`p-2 rounded-lg bg-green-600 hover:bg-green-700 duration-200 text-white`}><FiEdit size={16} /></button></td>
+                                                            <td className={`px-4 py-4 text-center whitespace-nowrap`}>
+                                                                <div className={`flex justify-center gap-2`}>
+                                                                    <button onClick={() => handleEditClick(item, 'bounce')} className={`p-2 rounded-lg bg-green-600 hover:bg-green-700 duration-200 text-white`}><FiEdit size={16} /></button>
+                                                                    <button onClick={() => handleDeleteClick(item, 'bounce')} className={`p-2 rounded-lg bg-red-600 hover:bg-red-700 duration-200 text-white`}><FiTrash2 size={16} /></button>
+                                                                </div>
+                                                            </td>
                                                         </motion.tr>
                                                     ))
                                                 }
@@ -331,7 +372,7 @@ function page() {
                         {selectedEvent === "Udbhav" && selectedCategory && selectedSubCategory &&
                             <div className={`w-full mt-8 overflow-x-auto rounded-2xl border border-zinc-800`}>
 
-                                <table className={`w-full min-w-[1500px] text-xs lg:text-sm border-collapse`}>
+                                <table className={`w-full min-w-[375px] text-xs lg:text-sm border-collapse`}>
 
                                     <thead className={`sticky top-0 bg-zinc-900 text-white z-20`}>
                                         <tr>
@@ -366,7 +407,12 @@ function page() {
                                                         <td className={`px-4 py-4 text-center`}>{item.choreographer || "--"}</td>
                                                         <td className={`px-4 py-4 text-center`}><a href={item.paymentScreenshot} target="_blank" className={`text-blue-400 hover:underline`}>View</a></td>
                                                         <td className={`px-4 py-4 text-center`}>{new Date(item.createdAt).toLocaleDateString()}</td>
-                                                        <td className={`px-4 py-4 text-center`}><button onClick={() => handleEditClick(item, 'udbhav')} className={`p-2 rounded-lg bg-green-600 hover:bg-green-700 duration-200 text-white`}><FiEdit size={16} /></button></td>
+                                                        <td className={`px-4 py-4 text-center`}>
+                                                            <div className={`flex justify-center gap-2`}>
+                                                                <button onClick={() => handleEditClick(item, 'udbhav')} className={`p-2 rounded-lg bg-green-600 hover:bg-green-700 duration-200 text-white`}><FiEdit size={16} /></button>
+                                                                <button onClick={() => handleDeleteClick(item, 'udbhav')} className={`p-2 rounded-lg bg-red-600 hover:bg-red-700 duration-200 text-white`}><FiTrash2 size={16} /></button>
+                                                            </div>
+                                                        </td>
                                                     </motion.tr>
                                                 ) :
                                                 <tr>
@@ -495,6 +541,21 @@ function page() {
                             </motion.div>
                         )}
                     </AnimatePresence>
+
+                    <AnimatePresence>
+                        {showDeleteModal && deleteTarget && (
+                            <motion.div data-lenis-prevent initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.2 }} className={`fixed inset-0 bg-black/70 backdrop-blur-sm flex justify-center items-center z-50 p-4`} onClick={() => setShowDeleteModal(false)}>
+                                <motion.div initial={{ scale: 0.8, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} exit={{ scale: 0.8, opacity: 0 }} transition={{ duration: 0.2 }} onClick={(e) => e.stopPropagation()} className={`bg-zinc-900 border border-zinc-800 rounded-2xl p-6 w-full md:w-auto md:px-5 flex flex-col justify-center items-center`}>
+                                    <p className={`w-full text-sm xl:text-lg font-semibold text-white text-center`}>Are you sure you want to delete this row?</p>
+                                    <p className={`w-full text-[12px] xl:text-sm text-white text-center opacity-75`}>This action cannot be reversed</p>
+                                    <div className={`flex gap-3 mt-6`}>
+                                        <button disabled={deleting} onClick={handleDeleteConfirm} className={`flex-1 px-4 py-2 rounded-lg bg-red-600 hover:bg-red-700 disabled:opacity-60 duration-200 text-white font-medium`}>Delete</button>
+                                        <button onClick={() => {setShowDeleteModal(false); setDeleteTarget(null);}} className={`flex-1 px-4 py-2 rounded-lg bg-white text-black font-medium`}>No</button>
+                                    </div>
+                                </motion.div>
+                            </motion.div>
+                        )}
+                    </AnimatePresence>
                 </div>
             </div>
         </>
@@ -502,3 +563,4 @@ function page() {
 }
 
 export default page;
+
