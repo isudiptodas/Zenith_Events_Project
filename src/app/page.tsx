@@ -10,6 +10,8 @@ import Footer from "@/components/Footer";
 import { motion, AnimatePresence } from 'motion/react'
 import WhatsappPopup from "@/components/WhatsappPopup";
 import { ongoingEvents } from "@/data/ongoingEvents";
+import { FcGoogle } from 'react-icons/fc';
+import { IoStarSharp } from 'react-icons/io5';
 
 function page() {
 
@@ -45,6 +47,14 @@ function page() {
 
           <motion.h1 initial={{ opacity: 0, filter: "blur(20px)" }} animate={{ opacity: 1, filter: "blur(0px)" }} transition={{ duration: 0.5, delay: 1.3, ease: "easeInOut" }} className={`w-full z-20 text-center md:text-start xl:px-10 md:px-6 font-bold text-white text-4xl lg:text-6xl xl:text-8xl font-lexend`}>CRAFTING UNFORGETTABLE EXPERIENCES</motion.h1>
           <motion.p initial={{ opacity: 0, filter: "blur(20px)" }} animate={{ opacity: 1, filter: "blur(0px)" }} transition={{ duration: 0.5, delay: 1.6, ease: "easeInOut" }} className={`w-full z-20 text-center md:text-start px-8 xl:px-10 md:px-6 font-imprima text-white text-[10px] md:text-[12px] lg:text-lg xl:text-xl mt-5`}>We design and execute high-impact brand activations and exceptional corporate and social events that leave a lasting impression.</motion.p>
+
+          <motion.div initial={{ opacity: 0, filter: "blur(20px)" }} animate={{ opacity: 1, filter: "blur(0px)" }} transition={{ duration: 0.5, delay: 1.6, ease: "easeInOut" }} className={`w-auto lg:w-full z-30 mt-3 lg:mt-5 flex justify-between items-center lg:items-start gap-2 xl:px-10 md:px-6`}>
+            <p className={`w-auto text-2xl xl:text-4xl`}><FcGoogle /></p>
+            <div className={`w-full flex flex-col justify-center items-start`}>
+              <p className={`text-white text-sm xl:text-lg flex`}><IoStarSharp /><IoStarSharp /><IoStarSharp /><IoStarSharp /><IoStarSharp /></p>
+              <p className={`w-full text-start text-[10px] xl:text-sm font-semibold text-white select-none`}>5 stars on Google</p>
+            </div>
+          </motion.div>
 
           <div className="w-full z-20 flex justify-center lg:justify-start px-4 lg:px-6 xl:px-10 pt-10">
             <div className="relative inline-block">

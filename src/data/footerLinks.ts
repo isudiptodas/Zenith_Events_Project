@@ -19,17 +19,13 @@ export const footerLinks = [
                 link: `/contact`
             },
             {
-                name: `Developer Login`,
-                link: `/dev-login`
-            },
-            {
                 name: `Helpdesk`,
                 link: `/helpdesk`
             },
         ]
     },
     {
-        name: `Social`,
+        name: `Contact`,
         links: [
             {
                 name: `Facebook`,
@@ -45,7 +41,11 @@ export const footerLinks = [
             },
             {
                 name: `Whatsapp`,
-                link: `918582888324 `
+                link: `918582888324`
+            },
+            {
+                name: `Office Address`,
+                link: `https://maps.app.goo.gl/u1AEVsh3CKsFdxqw7`
             },
         ]
     },
@@ -61,5 +61,14 @@ export const footerLinks = [
                 link: `/terms`
             },
         ]
-    }
+    },
+    {
+        name: `Others`,
+        links: [
+            {
+                name: `Developer Login`,
+                link: `/dev-login`
+            },
+        ]
+    },
 ]

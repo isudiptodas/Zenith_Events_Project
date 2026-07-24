@@ -5,7 +5,7 @@ export const allEvents = [
         desc: `Bounce is a 3x3 basketball tournament. Play hard, play fast & leave your mark.`,
         points: [
             'Prize pool upto 25,000/-',
-            'Registration fee : 1,250/-',
+            'Registration fee : 1,500/-',
             '3 Players + 1 Sub',
             'Registrations open till July 2nd'
         ],

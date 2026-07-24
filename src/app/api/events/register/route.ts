@@ -8,8 +8,6 @@ import { Resend } from "resend";
 import { UdbhavForm } from '@/models/udbhavForm';
 import { v4 as uuidv4 } from 'uuid';
 
-//const resend = new Resend(process.env.RESEND_API_KEY as string);
-
 const generateUniqueRegistrationId = async (): Promise<string> => {
     let registrationId = uuidv4();
     let exists = true;
@@ -28,6 +26,7 @@ const generateUniqueRegistrationId = async (): Promise<string> => {
 export async function POST(req: NextRequest) {
 
     await connectDb();
+    const resend = new Resend(process.env.RESEND_API_KEY as string);
 
     const formData = await req.formData();
     const type = formData.get('type') as string;
@@ -86,24 +85,24 @@ export async function POST(req: NextRequest) {
             await form.save();
 
             //send mail to user
-            // const { data: Data, error: err } = await resend.emails.send({
-            //     from: 'Zenith Events & Financial Consultancy <events@zefc.in>',
-            //     to: [data.captainEmail],
-            //     subject: 'Event Registration Confirmed',
-            //     react: React.createElement(EventConfirmationTemplate, {
-            //         name: data.Player1Name,
-            //         email: data.captainEmail,
-            //         eventName: type as string
-            //     }),
-            // });
+            const { data: Data, error: err } = await resend.emails.send({
+                from: 'Zenith Events & Financial Consultancy <events@zefc.in>',
+                to: [data.captainEmail as string],
+                subject: 'Event Registration Confirmed',
+                react: React.createElement(EventConfirmationTemplate, {
+                    name: data.Player1Name,
+                    email: data.captainEmail,
+                    eventName: type as string
+                }),
+            });
 
-            // if (err) {
-            //     console.log(err);
-            //     return NextResponse.json({
-            //         success: false,
-            //         message: `Could not sent mail`
-            //     }, { status: 503 });
-            // }
+            if (err) {
+                console.log(err);
+                return NextResponse.json({
+                    success: false,
+                    message: `Could not sent mail`
+                }, { status: 503 });
+            }
 
             return NextResponse.json({
                 success: true,
@@ -151,23 +150,23 @@ export async function POST(req: NextRequest) {
             });
 
             //send mail to user
-            // const { data: Data, error: err } = await resend.emails.send({
-            //     from: 'Zenith Events & Financial Consultancy <events@zefc.in>',
-            //     to: [data.email],
-            //     subject: 'Event Registration Confirmed',
-            //     react: React.createElement(EventConfirmationTemplate, {
-            //         email: data.email,
-            //         eventName: type as string
-            //     }),
-            // });
+            const { data: Data, error: err } = await resend.emails.send({
+                from: 'Zenith Events & Financial Consultancy <events@zefc.in>',
+                to: [data.email as string],
+                subject: 'Event Registration Confirmed',
+                react: React.createElement(EventConfirmationTemplate, {
+                    email: data.email,
+                    eventName: type as string
+                }),
+            });
 
-            // if (err) {
-            //     console.log(err);
-            //     return NextResponse.json({
-            //         success: false,
-            //         message: `Could not sent mail`
-            //     }, { status: 503 });
-            // }
+            if (err) {
+                console.log(err);
+                return NextResponse.json({
+                    success: false,
+                    message: `Could not sent mail`
+                }, { status: 503 });
+            }
 
             return NextResponse.json({
                 success: true,

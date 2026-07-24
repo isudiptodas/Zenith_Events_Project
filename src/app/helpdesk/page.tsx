@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useState } from "react"
 import { GrFormPreviousLink } from "react-icons/gr";
 import { toast } from "sonner";
+import Footer from "@/components/Footer";
 
 function page() {
 
@@ -44,13 +45,13 @@ function page() {
 
     return (
         <>
-            <div className={`w-full pt-28 min-h-screen bg-zinc-950 flex flex-col justify-start items-center relative`}>
+            <div className={`w-full pt-28 pb-16 min-h-screen bg-zinc-950 flex flex-col justify-start items-center relative`}>
                 <Link href='/' className={`fixed top-5 xl:top-10 xl:left-10 left-5 bg-white/10 text-white select-none p-2 rounded-full text-xl`}><GrFormPreviousLink /></Link>
 
                 <p className={`w-full text-center text-white font-semibold text-3xl select-none`}>Register your Issue</p>
                 <p className={`w-full px-8 text-center text-white mt-2 text-sm opacity-75 select-none`}>We're always ready to help you and answer your every complaint</p>
 
-                <div className={`w-[90%] xl:w-[45%] px-5 py-5 border-2 border-gray-500 rounded-2xl flex flex-col justify-center items-center mt-10`}>
+                <div data-lenis-prevent className={`w-[90%] overflow-y-auto overscroll-contain xl:w-[45%] px-5 py-5 border-2 border-gray-500 rounded-2xl flex flex-col justify-center items-center mt-10`}>
                     <p className={`w-full select-none text-white text-sm`}>Enter your reference ID :*</p>
                     <input onChange={(e) => setID(e.target.value)} value={referenceID} type="text" className={`w-full py-2 px-3 mt-3 rounded-md bg-zinc-800 text-white outline-none`} placeholder="Enter ID" />
 
@@ -63,6 +64,7 @@ function page() {
                     <span onClick={submitIssue} className={`w-full py-2 bg-linear-to-b from-gray-300 to-white text-black select-none font-semibold rounded-md mt-5 active:opacity-80 duration-200 ease-in-out text-center`}>Submit Issue</span>
                 </div>
             </div>
+            <Footer />
         </>
     )
 }

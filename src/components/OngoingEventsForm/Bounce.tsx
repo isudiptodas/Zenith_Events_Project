@@ -119,7 +119,7 @@ function Bounce() {
     try {
       setSubmitting(true);
       const res = await axios.post(`/api/events/register`, data);
-      if(res.status === 200) {
+      if (res.status === 200) {
         setRegistrationId(res.data.registrationId);
         setShowRegistrationModal(true);
       }
@@ -127,7 +127,7 @@ function Bounce() {
       setSubmitting(false);
       toast.error(error?.response?.data?.message || "Something went wrong.");
     }
-    finally{
+    finally {
       setSubmitting(false);
       setFormData(initialFormData);
       setFile(null);
@@ -140,10 +140,15 @@ function Bounce() {
       <div className={`w-full h-screen bg-linear-to-b from-yellow-400 via-orange-500 to-orange-700 flex justify-center items-center relative overflow-hidden px-3 py-5`}>
         <div data-lenis-prevent className={`w-full pt-5 pb-10 px-2 h-full bg-white overscroll-contain rounded-2xl flex flex-col justify-start items-center relative overflow-y-auto`}>
 
-          <p className={`w-[80%] py-3 select-none lg:py-6 border-b border-b-orange-400 rounded-full shadow-2xl text-center font-semibold text-2xl lg:text-4xl mb-10`}>Bounce Registration</p>
+          {/* <p className={`w-[80%] py-3 select-none lg:py-6 border-b border-b-orange-400 rounded-full shadow-2xl text-center font-semibold text-2xl lg:text-4xl mb-10`}>Bounce Registration</p> */}
 
-          <div className={`w-full px-3 h-auto mt-10 xl:w-[50%] flex flex-col justify-start items-center`}>
-            <p className={`w-full font-bold text-start select-none text-sm px-3`}>Team Name*</p>
+          <div className={`w-full px-3 h-auto mt-5 xl:w-[50%] flex flex-col justify-start items-center relative`}>
+            <div className={`relative w-full flex justify-center items-center`}>
+              {/* <div className={`w-full h-[30%] bg-linear-to-t from-white to-transparent -bottom-5 absolute`} /> */}
+              <img src="/assets/events/bounce-landscape.png" className={` w-auto object-contain rounded-t-4xl`} />
+            </div>
+
+            <p className={`w-full mt-10 font-bold text-start select-none text-sm px-3`}>Team Name*</p>
             <input name="teamName" value={formData.teamName} onChange={handleChange} type="text" className={`w-full bg-gray-200 mt-2 rounded-full py-3 px-4 focus:outline-orange-500 duration-300 ease-in-out`} placeholder="Enter your team name" />
 
             <div className={`w-full mt-4 grid grid-cols-1 md:grid-cols-2 justify-items-center items-start gap-4`}>
@@ -196,7 +201,7 @@ function Bounce() {
                 <input name="player4Name"
                   value={formData.player4Name}
                   onChange={handleChange} type="text" className={`w-full bg-gray-200 mt-2 rounded-full py-3 px-4 focus:outline-orange-500 duration-300 ease-in-out`} placeholder="Enter player 4 name" />
- 
+
 
                 <p className={`w-full font-bold text-start select-none text-sm px-3 mt-5`}>Player 4 - Contact*</p>
                 <input name="player4Contact"
@@ -216,7 +221,7 @@ function Bounce() {
               value={formData.captainEmail}
               onChange={handleChange} type="text" className={`w-full bg-gray-200 mt-2 rounded-full py-3 px-4 focus:outline-orange-500 duration-300 ease-in-out`} placeholder="Enter captains email id" />
 
-            <p className={`w-full font-bold text-start select-none text-sm px-3 mt-7`}>Scan this QR code to make the payment of ₹1250/-</p>
+            <p className={`w-full font-bold text-start select-none text-sm px-3 mt-7`}>Scan this QR code to make the payment of ₹1,500/-</p>
             <img src="/assets/payment-qr.jpeg" className={`h-56`} />
 
 
@@ -279,7 +284,7 @@ function Bounce() {
             </motion.div>
           )}
         </AnimatePresence>
-      </div> 
+      </div>
     </>
   )
 }

@@ -154,9 +154,12 @@ function Udbhav() {
             <div className={`w-full h-screen bg-linear-to-b from-yellow-400 via-orange-500 to-blue-500 flex justify-center items-center relative overflow-hidden px-3 py-5`}>
                 <div data-lenis-prevent className={`w-full pt-5 pb-10 px-2 h-full bg-white overscroll-contain rounded-2xl flex flex-col justify-start items-center relative overflow-y-auto`}>
 
-                    <p className={`w-[80%] py-3 select-none lg:py-6 border-b border-b-orange-400 rounded-full shadow-2xl text-center font-semibold text-2xl lg:text-4xl mb-10`}>Udbhav Registration</p>
+                    {/* <p className={`w-[80%] py-3 select-none lg:py-6 border-b border-b-orange-400 rounded-full shadow-2xl text-center font-semibold text-2xl lg:text-4xl mb-10`}>Udbhav Registration</p> */}
 
-                    <div className={`w-full md:w-[55%] xl:w-[30%] mt-5 px-3`}>
+                    <div className={`w-full md:w-[70%] mt-5 px-3 relative`}>
+                        <div className={`w-full relative mb-5 flex justify-center items-center`}>
+                            <img src="/assets/events/udbhav-landscape.png" className={` w-auto object-contain rounded-t-4xl`} />
+                        </div>
 
                         <p className={`font-bold text-sm px-3`}>Category*</p>
 
@@ -169,7 +172,7 @@ function Udbhav() {
 
                         <AnimatePresence>
                             {openDropdown === "category" &&
-                                <motion.div initial={{ opacity: 0, y: -8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }} className={`w-[90%] md:w-[55%] xl:w-[30%] mt-2 bg-white rounded-xl border shadow-lg overflow-hidden absolute left-1/2 -translate-x-1/2 z-30`}>
+                                <motion.div initial={{ opacity: 0, y: -8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }} className={`w-full mt-2 bg-white rounded-xl border shadow-lg overflow-hidden absolute left-1/2 -translate-x-1/2 z-30`}>
                                     <div className={`max-h-56 overflow-y-auto`}>
                                         {udbhavEvents.map(item =>
                                             <div key={item.category} onClick={() => handleSelection("category", item.category)} className={`px-4 py-3 hover:bg-orange-100 cursor-pointer duration-150`}>
@@ -183,7 +186,7 @@ function Udbhav() {
                     </div>
 
                     {formData.category &&
-                        <div className={`w-full md:w-[55%] xl:w-[30%] flex flex-col justify-center items-start mt-5 px-3`}>
+                        <div className={`w-full md:w-[70%] flex flex-col justify-center items-start mt-5 px-3 relative`}>
 
                             <p className={`font-bold text-sm px-3`}>Sub Category*</p>
 
@@ -196,7 +199,7 @@ function Udbhav() {
 
                             <AnimatePresence>
                                 {openDropdown === "subcategory" &&
-                                    <motion.div initial={{ opacity: 0, y: -8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }} className={`w-[90%] md:w-[55%] xl:w-[30%] mt-2 bg-white rounded-xl border shadow-lg overflow-hidden absolute left-1/2 -translate-x-1/2 z-30`}>
+                                    <motion.div initial={{ opacity: 0, y: -8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }} className={`w-full mt-2 bg-white rounded-xl border shadow-lg overflow-hidden absolute left-1/2 -translate-x-1/2 z-30`}>
                                         <div className={`max-h-56 overflow-y-auto`}>
                                             {selectedCategory?.subCategories.map(item =>
                                                 <div key={item.name} onClick={() => handleSelection("subcategory", item.name)} className={`px-4 py-3 hover:bg-orange-100 cursor-pointer duration-150`}>
@@ -212,7 +215,7 @@ function Udbhav() {
                     }
 
                     {selectedSubCategory &&
-                        <div className={`w-full xl:w-[55%] px-3 mt-8`}>
+                        <div className={`w-full md:w-[70%] px-3 mt-8`}>
 
                             <div className={`w-full mt-3 grid grid-cols-1 md:grid-cols-2 gap-4`}>
 
@@ -340,18 +343,18 @@ function Udbhav() {
                 </div>
             </div>
 
-        <AnimatePresence>
-          {showRegistrationModal && (
-            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.2 }} className={`fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50 p-4`} onClick={() => setShowRegistrationModal(false)}>
-              <motion.div initial={{ scale: 0.8, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} exit={{ scale: 0.8, opacity: 0 }} transition={{ duration: 0.2 }} onClick={(e) => e.stopPropagation()} className={`bg-white rounded-2xl p-6 lg:p-8 flex flex-col gap-4 items-center max-w-sm w-full`}>
-                <p className={`text-center text-lg lg:text-xl font-bold text-gray-800`}>Your Registration ID</p>
-                <p className={`text-center text-2xl lg:text-3xl font-bold text-blue-600 break-all`}>{registrationId}</p>
-                <p className={`text-center text-sm lg:text-base text-gray-600 mt-2`}>Save this ID for future references</p>
-                <button onClick={() => setShowRegistrationModal(false)} className={`w-full mt-4 py-3 rounded-lg bg-gradient-to-r from-yellow-400 via-orange-500 to-blue-500 hover:opacity-90 duration-200 text-white font-semibold`}>Ok, understood</button>
-              </motion.div>
-            </motion.div>
-          )}
-        </AnimatePresence>
+            <AnimatePresence>
+                {showRegistrationModal && (
+                    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.2 }} className={`fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50 p-4`} onClick={() => setShowRegistrationModal(false)}>
+                        <motion.div initial={{ scale: 0.8, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} exit={{ scale: 0.8, opacity: 0 }} transition={{ duration: 0.2 }} onClick={(e) => e.stopPropagation()} className={`bg-white rounded-2xl p-6 lg:p-8 flex flex-col gap-4 items-center max-w-sm w-full`}>
+                            <p className={`text-center text-lg lg:text-xl font-bold text-gray-800`}>Your Registration ID</p>
+                            <p className={`text-center text-2xl lg:text-3xl font-bold text-blue-600 break-all`}>{registrationId}</p>
+                            <p className={`text-center text-sm lg:text-base text-gray-600 mt-2`}>Save this ID for future references</p>
+                            <button onClick={() => setShowRegistrationModal(false)} className={`w-full mt-4 py-3 rounded-lg bg-gradient-to-r from-yellow-400 via-orange-500 to-blue-500 hover:opacity-90 duration-200 text-white font-semibold`}>Ok, understood</button>
+                        </motion.div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
 
         </>
     )
